@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data's Book on C#</title>
+
+    <link rel="icon" type="image/x-icon" href="../Sources/favicon.png">
+
+    <script src="../Sources/JS/setBackgroundMedia.js"></script>
+
+    <link rel="stylesheet" href="../Sources/JS/hljs/vs2015.css">
+    <script src="../Sources/JS/hljs/highlight.min.js"></script>
+    <script>
+        window.onload = function() {
+            hljs.highlightAll();
+        };
+    </script>
+
+    <link rel="stylesheet" href="../Sources/CSS/main.css">
+</head>
+<body>
+    <h1>Dosya İşlemleri</h1>
+
+    <div style="height: 100px;"></div>
+    
+    <div id="mainDiv">
+        <h2>Dosya İşlemleri Nedir?</h2>
+        <pre id="preh2">Dosya işlemleri, dosyalar veya klasörler üzerinde işlemler yaptığımız işlemlerdir.</pre>
+
+        <pre id="preh2">C# programlama dilinde <code class="language-csharp">File</code> sınıfı ile dosya ve <code class="language-csharp">Directory</code> sınıfı ile klasör işlemleri için kullanılır.</pre>
+
+        <h2>Dosya Oluşturma</h2>
+        <pre id="preh2"><code class="language-csharp">File.Create("DosyaYolu.uzantisi"); // Dosya oluşturma
+
+File.Copy("KaynakDosyaYolu","HedefDosyaYolu"); // Dosya kopyalama
+
+File.Move("TaşınanDosyaYolu","HedefDosya"); // Dosya taşıma
+
+File.Delete("DosyaYolu.uzantisi"); // Dosya silme</code></pre>
+
+        <h2>Directory</h2>
+        <pre id="language-csharp"><code class="language-csharp">Directory.CreateDirectory("KlasorYolu"); // Klasör oluşturma
+
+bool isDirectoryCreated = Directory.Exists("KlasorYolu"); // Klasör var mı diye kontrol eder. Bool değeri döndürür
+
+Directory.Move("KaynakKlasör", "HedefKlasör"); // Klasör taşıma
+
+string[] KlasorunIcindekiDosyalar = Directory.GetFiles("Klasör"); // Klasörün içersindeki dosyaları alır. String dizesi döndürür
+
+Directory.Delete("Klasör"); // Klasörü siler</code></pre>
+
+        <h2>Dosya Yazma</h2>
+        <pre id="preh2">Dosya yazma işlemi için StreamWriter kullanılır. Ayrıca bu kısımda <code class="language-csharp">using</code>'in başka bir kullanım alanı görüceksiniz. Normalde görevi projeye kütüphane dahil etmedir. Lakin dosya işlemlerinde otomatik kapatma ve içersine yazmak için kullanılıyor. Normal şartlarda StreamWriter ile yazdığınız metinler, gerçek dosyaya işlemez. Bunun için .flush() komutu kullanılır. <code>Using</code> sayesinde bu koddan kurtulmuş olduk.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">using (StreamWriter sw = new StreamWriter("dosyaYolu", true)) // True ile dosyanın içeriğine eklenir
+{
+    sw.WriteLine("Metin");
+}
+
+using (StreamWriter sw = new StreamWriter("dosyaYolu", false)) // False ile dosyanın içeriğinin üzerine yazılır.
+{
+    sw.WriteLine("Metin");
+}</code></pre>
+
+        <h2>Dosya Okuma</h2>
+        <pre id="preh2">Dosya okuma işini ise StreamReader sınıfı ile yapılır. <code>Using</code> aynı görevi üstlenerek işimizi kolaylaştırır.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">string dosyaIcerigi = ""; // Dosya içeriği değişkeni
+using (StreamReader sr = new StreamReader("dosyaYolu")) // StreamReader ile okuma işleminii başlatıyoruz
+{
+    string satir; // Her bir satır için değişken
+    while ((satir = sr.ReadLine()) != null) // Her satırı null olmadığı süreççe oku ve diğerine geç
+    {
+        dosyaIcerigi += satir; // Satır içeriğini değişkenimize ekle
+    }
+}
+
+Console.WriteLine(dosyaIcerigi); // Dosya içeriğimizi yazdır</code></pre>
+
+        <h2>JSON İşlemleri</h2>
+
+        <h3>JSON Nedir?</h3>
+        <pre id="preh2">Verileri seriyalez etmek için kullanılan bir dosya formatıdır.</pre>
+
+        <pre id="preh2"><code>Using System.Text.Json;</code> ile projemize dahil edelim.</pre>
+
+        <pre id="preh2">JSON genel verileri bir dosya şekilde saklamak ve düzenlemek için kullanılır. Eğer büyük projeler ile uğraşıyorsanız JSON öğrenmek, kodunuzu daha performanslı yazmanızı sağlayabilir.</pre>
+
+        <h3>JSON Formatı Elde Etme</h3>
+        <pre id="preh2">JSON formatı elde etmek için <code class="language-csharp">JsonSerializer.Serialize(Class);</code> ve formatını elde etmek istediğimiz bir sınıf gereklidir.</pre>
+
+        <pre id="preh2">Ufak bir örnek ile açıklayalım. Bir kullanıcı sınıfı ve onundan bir JSON formatı elde edelim.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">class Users // Formatını elde edeceğimiz sınıf
+{
+    public string name { get; set; }
+    public uint id { get; set; }
+    public uint age { get; set; }
+}
+
+
+public static void Main(string[] args)
+{
+    Users usr = new Users(); // Nesnemizi oluşturuyoruz
+
+    // Kullanıcıdan veri isteme
+    Console.Write("İsminizi giriniz: ");
+    string Name = Console.ReadLine();
+
+    Console.Write("Id giriniz: ");
+    string IdText = Console.ReadLine();
+    uint Id = Convert.ToUInt32(IdText);
+
+    Console.Write("Yaşınızı giriniz: ");
+    string AgeText = Console.ReadLine();
+    uint Age = Convert.ToUInt32(AgeText);
+
+    // Verileri nesneye işleme
+    usr.name = Name;
+    usr.id = Id;
+    usr.age = Age;
+
+    string format = JsonSerializer.Serialize(usr); // Formatı elde etme
+
+    Console.WriteLine("\nFormat: "+ format); // Konsola yazdırma
+}</code></pre>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/14 C%23 Dosya İşlemler.html/1.png" alt="14.1" width="800px">
+        </div>
+
+        <pre id="preh2">Eğer bir .json dosyasına yazdırma istersek.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">class Users // Formatını elde edeceğimiz sınıf
+{
+    public string name { get; set; }
+    public uint id { get; set; }
+    public uint age { get; set; }
+}
+
+
+public static void Main(string[] args)
+{
+    Users usr = new Users(); // Nesnemizi oluşturuyoruz
+
+    // Kullanıcıdan veri isteme
+    Console.Write("İsminizi giriniz: ");
+    string Name = Console.ReadLine();
+
+    Console.Write("Id giriniz: ");
+    string IdText = Console.ReadLine();
+    uint Id = Convert.ToUInt32(IdText);
+
+    Console.Write("Yaşınızı giriniz: ");
+    string AgeText = Console.ReadLine();
+    uint Age = Convert.ToUInt32(AgeText);
+
+    // Verileri nesneye işleme
+    usr.name = Name;
+    usr.id = Id;
+    usr.age = Age;
+
+    string format = JsonSerializer.Serialize(usr); // Formatı elde etme
+
+    using (StreamWriter sw = new StreamWriter("dosya.json")) // StreamWriter ile format'ı yazdırma
+    {
+        sw.WriteLine(format);
+    }
+}</code></pre>
+
+        <h2>JSON Dosyası Okuma</h2>
+        <pre id="preh2"><code class="language-csharp">JsonSerializer.Serialize();</code> sınıfları yazdırdığından, tersi olan <code>Sinif sinif = JsonSerializer.Deserialize&lt;Sinif>("metin")</code> ile, JSON yazılırken kullanılan sınıf ve JSON dosyasının içeriğini alan bir String ifadesi ile JSON dosyasını okur.</pre>
+
+        <pre id="preh2">Şimdi geliştirdiğimiz projeye birde JSON okuma ekleyelim.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">class Users // Formatını elde edeceğimiz sınıf
+{
+    public string name { get; set; }
+    public uint id { get; set; }
+    public uint age { get; set; }
+}
+
+
+public static void Main(string[] args)
+{
+    Users usr = new Users(); // Nesnemizi oluşturuyoruz
+
+    // Kullanıcıdan veri isteme
+    Console.Write("İsminizi giriniz: ");
+    string Name = Console.ReadLine();
+
+    Console.Write("Id giriniz: ");
+    string IdText = Console.ReadLine();
+    uint Id = Convert.ToUInt32(IdText);
+
+    Console.Write("Yaşınızı giriniz: ");
+    string AgeText = Console.ReadLine();
+    uint Age = Convert.ToUInt32(AgeText);
+
+    // Verileri nesneye işleme
+    usr.name = Name;
+    usr.id = Id;
+    usr.age = Age;
+
+    string format = JsonSerializer.Serialize(usr); // Formatı elde etme
+
+    using (StreamWriter sw = new StreamWriter("dosya.json")) // StreamWriter ile format'ı yazdırma
+    {
+        sw.WriteLine(format);
+    }
+
+    Console.WriteLine("\nJSON dosyası yazıldı"); // Bilgi mesajı
+
+    Console.WriteLine("\n\nYazılan JSON dosyası okunuyor...\n"); // Bilgi mesajı
+
+    string jsonString = "";
+
+    using(StreamReader sr = new StreamReader("dosya.json", true)) // StreamReader ile JSON dosyasını okuma
+    {
+        string satir;
+        while ((satir = sr.ReadLine()) != null)
+        {
+            jsonString += satir; // Satırları jsonString'e ekleme
+        }
+    }
+
+    Users okunanUsr = JsonSerializer.Deserialize<Users>(jsonString); // jsonString'i çevirme
+
+    // Okunan JSOn dosyasındaki verileri yazdırma
+    Console.WriteLine("Name: " + okunanUsr.name);
+    Console.WriteLine("Id: " + okunanUsr.id);
+    Console.WriteLine("Age: " + okunanUsr.age);
+}</code></pre>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/14 C%23 Dosya İşlemler.html/2.png" alt="14.2" width="800px">
+        </div>
+
+        <h2>Kaynakça</h2>
+        <ul>
+            <li><a href="https://furkanmorova.com/csharp-dosya-islemleri/">furkanmorova.com'dan dosya işlemleri</a></li>
+            <li><a href="https://learn.microsoft.com/tr-tr/dotnet/standard/serialization/system-text-json/how-to">Microsft'un resmi sitesindeki JSON işlemleri (Seriyalize Etme)</a></li>
+            <li><a href="https://learn.microsoft.com/tr-tr/dotnet/standard/serialization/system-text-json/deserialization">Microsft'un resmi sitesindeki JSON işlemleri (Deseriyalize Etme)</a></li>
+        </ul>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; background: transparent; text-align: center; padding: 10px 0; z-index: 100;">
+        <div>
+            <a href="./13 C%23 Asenkron Programlama.html" style="margin-right: 20px; cursor:pointer;">
+                &larr; Önceki
+            </a>
+            <a href="./15 C%23 Veritabamı İşlemleri.html" style="cursor:pointer;">
+                Sonraki &rarr;
+            </a>
+        </div>
+        <div>
+            <p>&copy; 2026 Data's Book</p>
+        </div>
+
+        <div style="position: absolute; right: 20px; bottom: 20px;">
+            <a href="./1 C%23 İçindekiler.html" style="text-decoration: none;">
+                İçindekiler
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
+
+<!-- Muhammet Enes nam-ı diğer Data Delete tarafından sevgi ile yapıldı <3 -->

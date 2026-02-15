@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data's Book on C#</title>
+
+    <link rel="icon" type="image/x-icon" href="../Sources/favicon.png">
+
+    <script src="../Sources/JS/setBackgroundMedia.js"></script>
+
+    <link rel="stylesheet" href="../Sources/JS/hljs/vs2015.css">
+    <script src="../Sources/JS/hljs/highlight.min.js"></script>
+    <script>
+        window.onload = function() {
+            hljs.highlightAll();
+        };
+    </script>
+
+    <link rel="stylesheet" href="../Sources/CSS/main.css">
+</head>
+<body>
+    <h1>Sınıflar</h1>
+
+    <div style="height: 100px;"></div>
+    
+    <div id="mainDiv">
+        <h2>Sınıflar Nedir?</h2>
+        <pre id="preh2">Sınıflar, fonksiyonları veya değişkenleri gruplandırabilceğimiz ve toplu bir şekilde değerlendirebilceğimiz yapılarıdır.</pre>
+
+        <pre id="preh2">İleride görüceğimiz OOP yani obje yönelimli programlama da sınıflar ana odaktır.</pre>
+
+        <h2>Nesne Oluşturma</h2>
+        <pre id="preh2">Sınıfları birer DNA'ya benzetebiliriz. Çünkü biyolojide DNA, organizmanın şeklini, özelliklerini belirleyen birer taslak görevi gören yapılardır. Aynı durum sınıflar içinde geçerlidir. Biz bir Class yani sınıf oluşturduğumuzda aslında birer canlı yapmış oluruz. İşte bu canlıyı kullanmak için ilk önce o canlıyı oluşturmak gereklidir. İşte nesne oluşturma eylemi budur.</pre>
+
+        <pre id="preh2">Örneğin, bir matematik sınımızı olsun ve içersinde dört işlem olsun. Daha sonra ana fonksiyonda canlımız durumunda olan matematik sınımızın bir nesnesini oluşturalım.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">class Matematik // Matematik sınıfı
+{
+    public int Topla(int a, int b)
+    {
+        return a + b;
+    }
+
+    public int Cikarma(int a, int b) 
+    {
+        return a - b; 
+    }
+
+    public float Bolme(int a, int b)
+    {
+        return a / b;
+    }
+
+    public int Carpma(int a, int b)
+    {
+        return a * b;
+    }
+}
+
+internal class Program
+{
+    static void Main(string[] args) // Ana fonksiyon
+    {
+        Matematik MAT = new Matematik(); // Matematik sınımızdan bir nesne oluşturduk
+        // Ve kodlarımızda kullandık
+
+        Console.WriteLine(MAT.Topla(2,2)); // 4
+        Console.WriteLine(MAT.Cikarma(2,5)); // -3
+        Console.WriteLine(MAT.Bolme(4,2)); // 2
+        Console.WriteLine(MAT.Carpma(5,2)); // 10
+    }
+}</code>
+
+Böylelikle her yerde operatörlerle işlem yapmamız gerekmeden, sadece nesnemizin fonksyonlarıyla işlem yaptık.</pre>
+
+        <h2>Static Kullanımı</h2>
+        <pre id="preh2">Static, nesne oluşturmadan sınıfın içeriğine ulaşmamızı sağlayan bir anahtar kelimedir.</pre>
+
+        <pre id="preh2">Static ve nesne oluşturma eyleminin arasındaki fark; Static direk öz sınıfın içeriğini ulaşırken, nesne oluşturma sınıfın bir kopyasıyla işlem yapmamızı sağlar.</pre>
+
+        <pre id="preh2">Şimdi nesne oluşturma ile yaptığımız matematik sınıfızı birde Static kullanımı ile görelim. Yapmamız gerek şey, sınıfımızın ve fonksiyonlarımızın erişim belirteçleri ile türleri arasında <code>static</code> ifadesi koymak. Ve artık nesne oluşturmak zorunda değiliz.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">static class Matematik // Matematik sınıfı
+{
+    public static int Topla(int a, int b)
+    {
+        return a + b;
+    }
+
+    public static int Cikarma(int a, int b) 
+    {
+        return a - b; 
+    }
+
+    public static float Bolme(int a, int b)
+    {
+        return a / b;
+    }
+
+    public static int Carpma(int a, int b)
+    {
+        return a * b;
+    }
+}
+
+internal class Program
+{
+    static void Main(string[] args) // Ana fonksiyon
+    {
+        // Nesne oluşturmaya gerek kalmadan fonksiyonlarmıza direk erişim sağlayabiliriz
+
+        Console.WriteLine(Matematik.Topla(2,2)); // 4
+        Console.WriteLine(Matematik.Cikarma(2,5)); // -3
+        Console.WriteLine(Matematik.Bolme(4,2)); // 2
+        Console.WriteLine(Matematik.Carpma(5,2)); // 10
+    }
+}</code></pre>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; background: transparent; text-align: center; padding: 10px 0; z-index: 100;">
+        <div>
+            <a href="./10 C%23 Fonksiyonlar.html" style="margin-right: 20px; cursor:pointer;">
+                &larr; Önceki
+            </a>
+            <a href="./12 C%23 OOP.html" style="cursor:pointer;">
+                Sonraki &rarr;
+            </a>
+        </div>
+        <div>
+            <p>&copy; 2026 Data's Book</p>
+        </div>
+
+        <div style="position: absolute; right: 20px; bottom: 20px;">
+            <a href="./1 C%23 İçindekiler.html" style="text-decoration: none;">
+                İçindekiler
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
+
+<!-- Muhammet Enes nam-ı diğer Data Delete tarafından sevgi ile yapıldı <3 -->

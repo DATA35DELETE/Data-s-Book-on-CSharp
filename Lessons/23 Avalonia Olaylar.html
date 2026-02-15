@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data's Book on C#</title>
+
+    <link rel="icon" type="image/x-icon" href="../Sources/favicon.png">
+
+    <script src="../Sources/JS/setBackgroundMedia.js"></script>
+
+    <link rel="stylesheet" href="../Sources/JS/hljs/vs2015.css">
+    <script src="../Sources/JS/hljs/highlight.min.js"></script>
+    <script>
+        window.onload = function() {
+            hljs.highlightAll();
+        };
+    </script>
+
+    <link rel="stylesheet" href="../Sources/CSS/main.css">
+</head>
+<body>
+    <h1>Olaylar</h1>
+
+    <div style="height: 100px;"></div>
+    
+    <div id="mainDiv">
+        <h2>Olay Nedir?</h2>
+        <pre id="preh2">Kullanıcının GUI bileşenleriyle etkileşime geçmesini sağlayan yapılardır.</pre>
+
+        <pre id="preh2">Örneğin bir butona basıldığında uygulamanın kapanmasını istersek, bir butonun özniteliklerine "Click" özniteliğini ekliyelim. İçine ise istediğimiz isimli bir fonksiyon tanımlıyoruz. Ve kod gelen fonksiyonun içerisine ise <code class="language-csharp">System.Environment.Exit(0);</code> yazıyoruz. Artık butona bastığımızda uygulamamız kapanacaktır.</pre>
+
+        <pre id="codeh2"><code class="language-xml">&lt;Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="DatasBookonAvalonia.MainWindow"
+        Title="DatasBookonAvalonia">
+
+		&lt;Button Content="Uygulamayı Kapat"
+                Click="Exited"/>
+&lt;/Window></code>
+
+Kod tarafı
+
+<code class="language-csharp">using Avalonia.Automation.Peers;
+using Avalonia.Controls;
+
+namespace DatasBookonAvalonia
+{
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        private void Exited(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            System.Environment.Exit(0);
+        }
+    }
+}</code>
+
+Böylelikle Event'ler ile uygulamamızı </pre>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; background: transparent; text-align: center; padding: 10px 0; z-index: 100;">
+        <div>
+            <a href="" style="margin-right: 20px; cursor:pointer;">
+                &larr; Önceki
+            </a>
+            <a href="" style="cursor:pointer;">
+                Sonraki &rarr;
+            </a>
+        </div>
+        <div>
+            <p>&copy; 2026 Data's Book</p>
+        </div>
+
+        <div style="position: absolute; right: 20px; bottom: 20px;">
+            <a href="./1 C%23 İçindekiler.html" style="text-decoration: none;">
+                İçindekiler
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
+
+<!-- Muhammet Enes nam-ı diğer Data Delete tarafından sevgi ile yapıldı <3 -->

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data's Book on C#</title>
+
+    <link rel="icon" type="image/x-icon" href="../Sources/favicon.png">
+
+    <script src="../Sources/JS/setBackgroundMedia.js"></script>
+
+    <link rel="stylesheet" href="../Sources/JS/hljs/vs2015.css">
+    <script src="../Sources/JS/hljs/highlight.min.js"></script>
+    <script>
+        window.onload = function() {
+            hljs.highlightAll();
+        };
+    </script>
+
+    <link rel="stylesheet" href="../Sources/CSS/main.css">
+</head>
+<body>
+    <h1>Stil ve Tema</h1>
+
+    <div style="height: 100px;"></div>
+    
+    <div id="mainDiv">
+        <h2>Stil Nedir?</h2>
+        <pre id="preh2">Stil, bir bileşene hazır bir görünüm veya bir bileşende olmayan özellikleri kullanmamızı sağlar.</pre>
+
+        <pre id="preh2">Örneğin, sabit bir teması olan bir uygulama geliştiriyoruz. Normal şartlarda bu stil için her bir bileşene ayrı ayrı öznitelikler tanımlamamız gerekir. Takdir edersiniz ki bu süreç oldukça zaman kaybı. İşte bunun için Stil kullanırız.</pre>
+
+        <pre id="preh2">Kullanabilmek için ilk önce bir Layout yöneticilerden birini seçip içersine "LayoutAdi.Style" etiketi açalım. Ardından onun içersine "Style Selector="ElemanTürü"" ile hangi eleman veya elemanlara etki ediceğini yazacağımız kısmı açalım. Bu kısımda Selector özniteliği bize hangi bileşenlere; hangi sınıfa ve hangi ismi sahip elemanlara etki ediceğini belirtir. Eğer sınıfı "btn" olan bileşenlere erişmek istersek, "Selector="Button.btn"". İsmi "btn" olan bir bileşene ise "Selector="Button#btn"" şeklinde etki edilir. Aynı zamanda olaylara bağlı olarak da "Button:focus" şeklinde, Button bileşenine odaklandığında uygulanacak stil gibi işlemler yapılabilir.</pre>
+
+        <pre id="codeh2"><code class="language-xml">&lt;Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="DatasBookonAvalonia.MainWindow"
+        Title="DatasBookonAvalonia">
+        &lt;Canvas>
+            &lt;Canvas.Styles>
+				&lt;Style Selector="Button">
+					&lt;Style.Setters>
+						&lt;Setter Property="Background" Value="Green"/>
+                    &lt;/Style.Setters>
+                &lt;/Style>
+            &lt;/Canvas.Styles>
+
+            &lt;Button/> &lt;!-- Artık koyulan tüm butonların arkaplan rengi yeşil olucak -->
+        &lt;/Canvas>
+&lt;/Window></code></pre>
+
+        <h2>Border</h2>
+        <pre id="preh2">Border bileşenin üzerine bir bileşen koyarak daha farklı görünümler elde etmemizi sağlar.</pre>
+
+        <pre id="preh2">Stillerde önemi büyük olan bu bileşen, bizlere tanımlamak istediğimiz özelliğin istediğimiz bir bileşene uygulamamızı sağlar. Örneğin çoğu bileşende CornerRadiius özniteliği yoktur. Bunun için tanımlamak istediğimiz bileşene Border ile sarıyoruz ve Border'a CornerRadiius özniteliğini uyguluyoruz. Sonuç olarak istediğimiz görüntü elde etmek için bazen Border'a başvurucağız.</pre>
+
+        <pre id="codeh2"><code class="language-xml">&lt;TextBlock Text="Yazi" Background="Red" CornerRadiıs="25"/> &lt;!-- Hata çıkıcaktır -->
+
+&lt;Border CornerRadius="25" Background="Red">
+	&lt;TextBlock Text="Yazi"/> &lt;!-- Sanki CornerRadius varmış gibi görünür -->
+&lt;/Border></code></pre>
+
+        <h2>Resources</h2>
+        <pre id="preh2">Resources yani kaynaklar, sıkça kullanılan kaynakları isimlendirmek için kullanılan bir yapıdır.</pre>
+
+        <pre id="preh2">Yukarıda bahsettiğim Style Tag'ının mantığına benzer olsada, bu daha çok tek bir öznitelik için kullanılır. Örneğin bir rengin HEX kodu vardır ve o rengi sürekli kullanıyorsanız, yazması zor olabilir. Bunun için Resources'lar vardır.</pre>
+
+        <pre id="preh2">Resources'ları kullanabilmek için kullanacağımız Layout yöneticisine gidip X.Resource Tag'ını açalım.</pre>
+
+        <pre id="codeh2"><code class="language-xml">&lt;Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="DatasBookonAvalonia.MainWindow"
+        Title="DatasBookonAvalonia">
+    &lt;Window.Resources>
+		&lt;SolidColorBrush x:Key="Rengim">#1a1a1a&lt;/SolidColorBrush>
+    &lt;/Window.Resources>
+
+    &lt;Canvas Background="{DynamicResource Rengim}"/> &lt;!-- Grimsi bir tonu olmuş oldu -->
+&lt;/Window></code></pre>
+
+        <h2>Kaynakça</h2>
+        <ul>
+            <li><a href="https://docs.avaloniaui.net/docs/guides/styles-and-resources/resources">https://docs.avaloniaui.net/docs/guides/styles-and-resources/resources</a></li>
+        </ul>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; background: transparent; text-align: center; padding: 10px 0; z-index: 100;">
+        <div>
+            <a href="./21 Avalonia Layout Yöneticileri.html" style="margin-right: 20px; cursor:pointer;">
+                &larr; Önceki
+            </a>
+            <a href="" style="cursor:pointer;">
+                Sonraki &rarr;
+            </a>
+        </div>
+        <div>
+            <p>&copy; 2026 Data's Book</p>
+        </div>
+
+        <div style="position: absolute; right: 20px; bottom: 20px;">
+            <a href="./1 C%23 İçindekiler.html" style="text-decoration: none;">
+                İçindekiler
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
+
+<!-- Muhammet Enes nam-ı diğer Data Delete tarafından sevgi ile yapıldı <3 -->

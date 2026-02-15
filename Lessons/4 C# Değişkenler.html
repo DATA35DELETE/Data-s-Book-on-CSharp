@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data's Book on C#</title>
+
+    <link rel="icon" type="image/x-icon" href="../Sources/favicon.png">
+
+    <script src="../Sources/JS/setBackgroundMedia.js"></script>
+
+    <link rel="stylesheet" href="../Sources/JS/hljs/vs2015.css">
+    <script src="../Sources/JS/hljs/highlight.min.js"></script>
+    <script>
+        window.onload = function() {
+            hljs.highlightAll();
+        };
+    </script>
+
+    <link rel="stylesheet" href="../Sources/CSS/main.css">
+</head>
+<body>
+    <h1>Değişkenler</h1>
+
+    <div style="height: 100px;"></div>
+    
+    <div id="mainDiv">
+        <h2>Değişkenler Nedir?</h2>
+        <pre id="preh2">Değişkenler, programlarda geçici veya kalıcı olarak depolanan değerlerdir.</pre>
+
+        <pre id="preh2">Örneğin; Bir banka giriş sistemi yazdığımızı düşünelim. O sistemde kullanıcının banka şifresine ihtiyacımız öyle değil mi? Eğer değişkenler olmasa idi, programcı sürekli kullanıcıdan şifresini istemek zorunda kalıcaktı. İşte değişkenler bu kısımda devreye giriyor. Değişkenleri, eğer birden fazla kısımda bir değeri sürekli kullanıcaksak bir değişken tanımlarız ve ihtiyaç durumunda çağrırız</pre>
+
+        <h2>Sayısal Değişkenler</h2>
+        
+        <h3>Byte</h3>
+        <pre id="preh3">Byte, C#'daki en küçük sayı türüdür. 8 bit uzunluğundadır. Sbyte isimli bir alt türü vardır.</pre>
+
+        <pre id="codeh3"><code class="language-csharp">byte yas = 15; // 0 ila 255 arasındaki sayıları alabilir
+sbyte borc = -100; // -128 ila 127 arasındaki sayıları alabilir. Farkı eksiye düşebilir</code></pre>
+
+        <h3>Short</h3>
+        <pre id="preh3">Short, 16 bit uzunluğundadır. Ushort isimki bir alt türü vardır.</pre>
+
+        <pre id="codeh3"><code class="language-csharp">short MO2000 = -2000; // -32,768 ila 32,767 arasında tam sayı alabilir
+ushort kurulus = 1923; // 0 ila 65,535 arasındaki sayıları alabilir. Farkı sadece pozitif sayılardır.</code></pre>
+
+        <h3>Integer</h3>
+        <pre id="preh3">Integer, C# programlama dilinde en çok kullanılan sayısal değişken türüdür. Ayrıca 16, 32 ve 64 bit uzunluğundaki versiyonları vardır. Fakat varsıyan değeri 32 bit uzunluğundadır. Uint isimli bir alt türü vardır.</pre>
+
+        <pre id="codeh3"><code class="language-csharp">int paraMiktarı = 1000000; // -2,147,483,648 ila 2,147,483,647 arasında tam sayı alabilir
+uint izmirinNüfusu = 4493242; // 0 ila 4,294,967,295 arasında tam sayı alabilir
+
+System.Int64 altmisDortBitlikSayi = -64; // 64 bit uzunluğundaki sayı tanımlamak istersek
+System.UInt64 isaretsiz = 64; // İşaretsiz versiyonu</code></pre>
+
+        <h3>Long</h3>
+        <pre id="preh3">Long, C#'daki en uzun tam sayı değişken türüdür. Aynı zamanda 64 bit uzunluğunda ve System.Int64 sınıfına aittir. Dolaylı yoldan bir Integer sayısıdır.</pre>
+
+        <pre id="codeh3"><code class="language-csharp">long dunyaNufusu = 8000000000; // -9,223,372,036,854,775,808 ila 9,223,372,036,854,775,807 arasında tam sayı alabilir
+ulong isaretsiz = 8000000000; // İşaretsiz versiyonudur.</code></pre>
+
+        <h3>Float</h3>
+        <pre id="preh3">Float, C#'da çokça kullanılan ve ondalıklı sayıları ifade etmemizi sağlayan bir sayısal değişken türüdür. Sayının sonunda her zaman "f" ibaresi olmalıdır. Noktadan önce 9 basamaklık sayı alabilir.</pre>
+
+        <pre id="codeh3"><code id="language-csharp">float boy = 1.60f; // ±1.5 x 10^45 to ±3.4 x 10^38 arasında tam sayı alabilir</code></pre>
+
+        <h3>Double</h3>
+        <pre id="preh3">Double, hassas işlemlerde kullanılan sayısal veri türüdür. Noktadan önce 17 basamaklı sayı gelebilir.</pre>
+
+        <pre id="codeh3"><code class="language-csharp">double hassasIslemSonuc = 1315453575.13451312; // ±5.0 × 10^−324 to ±1.7 × 10^308 arasında tam sayı alabilir</code></pre>
+
+        <h2>Sözel Değişkenler</h2>
+
+        <h3>Char</h3>
+        <pre id="preh3">Char, tek bir karakter tutan bir sözel veri tipidir.</pre>
+
+        <pre id="codeh3"><code class="language-csharp">char A = 'A';</code></pre>
+
+        <h3>String</h3>
+        <pre id="preh3">String, çoklu karakter tutan bir sözel veri tipidir. Char ile ilişkisi ise birden fazla Char'ın birleşimi sonucu oluşan tip, String'dir.</pre>
+
+        <pre id="codeh3"><code class="language-csharp">string isim = "Data Delete"; // Boyutu UInt'ın sınırıdır.</code></pre>
+    
+        <h2>Boolean</h2>
+        <pre id="preh2">Boolean, sadece iki değer alabilir. True ve False yani açık ve kapalı yani bir ve sıfır. 1 bit uzunluğundadır.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">bool dogruMu = false;
+bool yanlisMi = true;</code></pre>
+
+        <h2>İsimlendirme Kuralları</h2>
+        <pre id="preh2">Değişkenler isimlendirilken bunlara dikkat edilmesi gereklidir. Aksi takdirde hatalar ile kaşılaşabilir.</pre>
+
+        <table id="tableh2">
+            <thead>
+                <tr>
+                    <th>Kural İsmi</th>
+                    <th>Açıklaması</th>
+                    <th>Yanlış ❌</th>
+                    <th>Doğru ✅</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Rakam Kullanımı</td>
+                    <td>Rakamları, değişkenin başına konulamaz. Lakin harflerden sonra kullanılabilir</td>
+                    <td>int 2000 = 2000;</td>
+                    <td>int s2000 = 2000;</td>
+                </tr>
+                <tr>
+                    <td>Özel İşaretler Kullanımı</td>
+                    <td>Özel işaretler değişken tanımlarken kullanılmaz</td>
+                    <td>string $ = dolar;</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Boşluk Kullanımı</td>
+                    <td>İsimlendirirken boşluk kullanılmaz. Fakat _ kullanıla bilir</td>
+                    <td>char A Harfi = 'A';</td>
+                    <td>char A_Harfi = 'A';</td>
+                </tr>
+                <tr>
+                    <td>Case Kavramı</td>
+                    <td>Değişkenler kolay anlaşılsın diye Case'ler oluşturulmuştur. C#'da değişken isimlendirirken PascalCase kullanılır. Yani her kelime bitişik ve ilk harfleri büyük. Yapılmaması durumunda hata vermez</td>
+                    <td>byte yemekmasasininayaklari = 4;</td>
+                    <td>byte YemekMasasininAyaklari = 4;</td>
+                </tr>
+                <tr>
+                    <td>Türkçe Karakter Kullanımı</td>
+                    <td>Türkçe karakterler C#'da hata çıkarmaz. Lakin yapısı gereği kullanılması önerilmez</td>
+                    <td>boolean Doğru = true;</td>
+                    <td>boolean Dogru = true;</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Erişim Belirteçleri</h2>
+        <pre id="preh2">Erişim belirteçleri, bir yapının kimlerin erişip erişemediğini belirleyen bir ifadedir. Erişim belirteçli değişkenler tanımlamak için Internal Class içine tanımlanır.</pre>
+
+        <table id="tableh2">
+            <thead>
+                <th>Erişim Belirteci</th>
+                <th>Açıklaması</th>
+                <th>Kullanımı</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Private</td>
+                    <td>Sadece kendi ve alt Class'larca erişebilir</td>
+                    <td>private string sifre = "psswrd";</td>
+                </tr>
+                <tr>
+                    <td>Protected</td>
+                    <td>Sadece kendi ve alt Class'larca erişebilir ve Class'dan türetilen Class'larca</td>
+                    <td>protected string adres = "İzmir";</td>
+                </tr>
+                <tr>
+                    <td>Public</td>
+                    <td>Tüm Class'larca erişebilir</td>
+                    <td>public string ad = "Data";</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Kullanıcıdan Veri Alma</h2>
+        <pre id="preh2">Kullanıcıdan veri almak için <code class="language-csharp">Console.ReadLine()</code> ile alınır. Ayrıca aldığı veri türü her zaman String'dir.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">Console.WriteLine("Metin Giriniz:");
+string girdi = Console.ReadLine();
+
+Console.WriteLine($"Girilen metin: {girdi}"); // $ ve {} ile String birleştirilmesi yapılabilir</code></pre>
+
+        <h2>Değişlen Türleri Dönüştürme</h2>
+        <pre id="preh2">Değişken tiplerini dönüştürmek için Convert kullanılır.</pre>
+
+        <h3>String &rarr; Integer</h3>
+        <pre id="codeh3"><code class="language-csharp">int sayi = Convert.ToInt32("1234"); //1234</code></pre>
+
+        <h3>Integer &rarr; String</h3>
+        <pre id="codeh3"><code class="language-csharp">string BesYuz = Convert.ToString(500); // "500"</code></pre>
+
+        <h3>Integer &rarr; Float</h3>
+        <pre id="codeh3"><code class="language-csharp">float derece = Convert.ToSingle(32); //32.0f</code></pre>
+
+        <h3>Float &rarr; Integer</h3>
+        <pre id="codeh3"><code class="language-csharp">int KusuratsizSayi = Convert.ToInt32(500.1213); // 500</code></pre>
+
+        <h2>Sabitlik</h2>
+        <pre id="preh2">Sabitlik, bir değişkeni bir kere tanımladıktan sonra bir daha asla değiştirilemeyen verilerdir. İşlem <code class="language-csharp">const</code> ifadesi ile uygulanır.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">const float pi = 3.14;
+pi = 2.34; // Hata alınacaktır.</code></pre>
+
+        <h2>Var</h2>
+        <pre id="preh2">Var, değişken tiplerini otomatik olarak atayan bir anahatar kelimedir.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">int sayi = 12; // Integer
+var sayi2 = 3; // Integer</code></pre>
+
+        <h2>Kaynakça</h2>
+        <ul>
+            <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/integral-numeric-types">Sayısal Veri Türleri</a></li>
+            <li><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/floating-point-numeric-types">Ondalıklı Sayı Türleri</a></li>
+            <li><a href="https://bidb.itu.edu.tr/seyir-defteri/blog/2013/09/06/c-dilinde-erişim-belirleyiciler-(access-modifiers)">Erişim Belirteçleri</a></li>
+        </ul>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; background: transparent; text-align: center; padding: 10px 0; z-index: 100;">
+        <div>
+            <a href="./3 C%23 Giriş.html" style="margin-right: 20px; cursor:pointer;">
+                &larr; Önceki
+            </a>
+            <a href="./5 C%23 Operatörler.html" style="cursor:pointer;">
+                Sonraki &rarr;
+            </a>
+        </div>
+        <div>
+            <p>&copy; 2026 Data's Book</p>
+        </div>
+
+        <div style="position: absolute; right: 20px; bottom: 20px;">
+            <a href="./1 C%23 İçindekiler.html" style="text-decoration: none;">
+                İçindekiler
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
+
+<!-- Muhammet Enes nam-ı diğer Data Delete tarafından sevgi ile yapıldı <3 -->

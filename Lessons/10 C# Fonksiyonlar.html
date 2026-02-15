@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data's Book on C#</title>
+
+    <link rel="icon" type="image/x-icon" href="../Sources/favicon.png">
+
+    <script src="../Sources/JS/setBackgroundMedia.js"></script>
+
+    <link rel="stylesheet" href="../Sources/JS/hljs/vs2015.css">
+    <script src="../Sources/JS/hljs/highlight.min.js"></script>
+    <script>
+        window.onload = function() {
+            hljs.highlightAll();
+        };
+    </script>
+
+    <link rel="stylesheet" href="../Sources/CSS/main.css">
+</head>
+<body>
+    <h1>Fonksiyonlar</h1>
+
+    <div style="height: 100px;"></div>
+    
+    <div id="mainDiv">
+        <h2>Fonksiyon Nedir?</h2>
+        <pre id="preh2">Fonksiyonlar, program akışını yönlendirebile ve çağrıldığında, tanımlanmış kodları çalıştıran yapılardır.</pre>
+
+        <pre id="preh2">Fonksiyonlar genelde eğer bir iş birden fazla kodda uygulanıyorusa, kod tasarufu için fonksiyonlar kullanılır. Öğrenğin; Bir hesap makinesinde tüm işlemler ana fonksiyonda yani Main fonksiyonunda değil, her bir işlem bir fonksiyon şeklinde ihtiyaç durumunda çağrılır.</pre>
+
+        <pre id="preh2">Aynı zaman erişim belirteçleri, veri türleri gibi kavramlarlada kullanılabilir.</pre>
+
+        <h3>Main Fonksiyonu</h3>
+        <pre id="preh3">Main fonksiyonu, programlar için çok önemlidir. Programlar için başlama noktasına benzetebilceğimiz bu fonksiyon, ilk kodları çalıştırır ve programın çalışma başlangıcını sağlar.</pre>
+
+        <h2>Void'li Fonksiyonlar</h2>
+        <pre id="preh2">Void, hiçlik demek. Void'li fonksiyonlar ise geriye hiçbir değer döndürmeyen fonkiyonlardır. Yani sadece program akışını değiştirirler.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">internal class Program
+{
+    static void Main(string[] args) // Ana fonksiyon
+    {
+        SayHello();
+    }
+
+    public static void SayHello()
+    {
+         Console.WriteLine("Hello, World!");
+    }
+}</code></pre>
+
+        <h2>Return'lü fonksiyonlar</h2>
+        <pre id="preh2">Return'lü fonksiyonlar, Void'lilerin aksine geriye bir değer döndürürler. Bu değer döndürme olayını, matematikteki fonksiyonlar yapısına benzetebiliriz. Farkı; Matematikte sayılar alabilrken yazılım da sayı, yazı ve koşul ifadelerini alabiliyoruz.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">internal class Program
+{
+    static void Main(string[] args) // Ana fonksiyon
+    {
+        Console.WriteLine(HelloWorldText()); // HelloWorldText ile "Hello, World!" yazısını alma
+    }
+
+    // Hangi tür veri döndürülecekse, onun türü fonksiyon isminden önceki kısma yazılır
+    public static string HelloWorldText()
+    {
+         return "Hello, World!";
+    }
+}</code></pre>
+
+        <h2>Parametreli Fonksiyonlar</h2>
+        <pre id="preh2">Parametreli fonksiyonlar, çağrılırken bir veya birden fazla veri isteyebilen fonksiyonlardır. Parantezlerinde istenir ve çağrılırken parantezlerinde gönderilir.</pre>
+
+        <pre id="preh2"><code class="language-csharp">internal class Program
+{
+    static void Main(string[] args) // Ana fonksiyon
+    {
+        Console.WriteLine(KareAl(2)); // 4
+    }
+
+    public static int KareAl(int x) // Main'den gönderilen 2, x adlı bir değişkene atandı
+    {
+         return x * x;
+    }
+}</code></pre>
+
+        <pre id="preh2">İstersek varsayılan değer de hatayabiliriz. Böylelikte parantezlerinde hiç bir şey göndermesek bile hata almadan işlemler gerçekleşebilir.</pre>
+
+        <pre id="preh2"><code class="language-csharp">internal class Program
+{
+    static void Main(string[] args) // Ana fonksiyon
+    {
+        Console.WriteLine(KareAl()); // 1
+    }
+
+    public static int KareAl(int x = 1) // Varsayılan x'in değeri 1
+    {
+         return x * x;
+    }
+}</code></pre>
+
+        <h2>Aşırı Yükleme</h2>
+        <pre id="preh2">Aşırı yükleme, aynı isimle fonksiyonlar, farklı parametre almasıyla oluşan avantaja denir.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">internal class Program
+{
+    static void Main(string[] args) // Ana fonksiyon
+    {
+        Console.WriteLine(Topla(2,2)); // int parametreli metot çağrısı
+        Console.WriteLine(Topla(2.5f, 3.5f)); // float parametreli metot çağrısı
+    }
+
+    public static int Topla(int a, int b)
+    {
+         return a + b;
+    }
+
+    public static float Topla(float a, float b)
+    {
+        return a + b;
+    }
+}</code></pre>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; background: transparent; text-align: center; padding: 10px 0; z-index: 100;">
+        <div>
+            <a href="./9 C%23 Hata Yönetimi.html" style="margin-right: 20px; cursor:pointer;">
+                &larr; Önceki
+            </a>
+            <a href="./11 C%23 Sınıflar.html" style="cursor:pointer;">
+                Sonraki &rarr;
+            </a>
+        </div>
+        <div>
+            <p>&copy; 2026 Data's Book</p>
+        </div>
+
+        <div style="position: absolute; right: 20px; bottom: 20px;">
+            <a href="./1 C%23 İçindekiler.html" style="text-decoration: none;">
+                İçindekiler
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
+
+<!-- Muhammet Enes nam-ı diğer Data Delete tarafından sevgi ile yapıldı <3 -->

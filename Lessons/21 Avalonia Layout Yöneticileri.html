@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data's Book on C#</title>
+
+    <link rel="icon" type="image/x-icon" href="../Sources/favicon.png">
+
+    <script src="../Sources/JS/setBackgroundMedia.js"></script>
+
+    <link rel="stylesheet" href="../Sources/JS/hljs/vs2015.css">
+    <script src="../Sources/JS/hljs/highlight.min.js"></script>
+    <script>
+        window.onload = function() {
+            hljs.highlightAll();
+        };
+    </script>
+
+    <link rel="stylesheet" href="../Sources/CSS/main.css">
+</head>
+<body>
+    <h1>Layout Yöneticileri</h1>
+
+    <div style="height: 100px;"></div>
+    
+    <div id="mainDiv">
+        <h2>Layout Nedir?</h2>
+        <pre id="preh2">İçine kontrol ve Layout alabilen bileşenlerdir.</pre>
+
+        <pre id="preh2">Programların ana fonksiyonu olduğu gibi, Layout'larında ana bir Layout'u vardır. Oda Window'dur. Window, gördüğümüz penceredir ve aynı şekilde kontrollerdeki öznitelikleri de bu kısımda kulanabiliriz. Ayrıca "d:" başlıcan öznitelikler sadece ön gösterim kısmında gösterilir, normal uygulamada gösterilmez.</pre>
+
+        <h2>Grid</h2>
+        <pre id="preh2">Grid, bir tablo şeklinde bir Layout sağlar. Sütünlar ve satırlar vardır. Bu sütün ve satır arasında kalan kısımlara bir kontrol yerleştireceksek eğer, <code>Grid.Row=""</code> ve <code>Grid.Column=""</code> ile belirlenir.</pre>
+
+        <pre id="preh2">Şimdi ise sayfayı dörde bölelim ve hangi alan, hangi sütün ve satıra denk geliyormuş diye bakalım.</pre>
+
+        <pre id="codeh2"><code class="language-xml">&lt;Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="DatasBookonAvalonia.MainWindow"
+        Title="DatasBookonAvalonia">
+    &lt;Grid>
+		&lt;Grid.ColumnDefinitions>
+			&lt;ColumnDefinition/>
+            &lt;ColumnDefinition/>
+        &lt;/Grid.ColumnDefinitions>
+
+        &lt;Grid.RowDefinitions>
+			&lt;RowDefinition/>
+            &lt;RowDefinition/>
+        &lt;/Grid.RowDefinitions>
+
+        &lt;TextBlock Text="0,0" FontSize="50"
+                   Background="Green" Foreground="White"
+                   
+                   Grid.Column="0" Grid.Row="0"/>
+
+        &lt;TextBlock Text="1,0" FontSize="50"
+                   Background="Yellow" Foreground="White"
+                   
+                   Grid.Column="1" Grid.Row="0"/>
+
+        &lt;TextBlock Text="1,1" FontSize="50"
+                   Background="Blue" Foreground="White"
+                   
+                   Grid.Column="1" Grid.Row="1"/>
+
+        &lt;TextBlock Text="0,1" FontSize="50"
+                   Background="Red" Foreground="White"
+                   
+                   Grid.Column="0" Grid.Row="1"/>
+    &lt;/Grid>
+
+    &lt;!--
+    &lt;Grid> Layout'umuz
+		&lt;Grid.ColumnDefinitions> Sütünlar
+			&lt;ColumnDefinition/> Sütün1
+            &lt;ColumnDefinition/> Sütün1
+        &lt;/Grid.ColumnDefinitions>
+
+        &lt;Grid.RowDefinitions> Satırlar
+			&lt;RowDefinition/> Satır1
+            &lt;RowDefinition/> Satır2
+        &lt;/Grid.RowDefinitions>
+
+        &lt;TextBlock Text="0,0" FontSize="50"
+                   Background="Green" Foreground="White"
+                   
+                   Grid.Column="0" Grid.Row="0"/> Eleman1
+
+        &lt;TextBlock Text="1,0" FontSize="50"
+                   Background="Yellow" Foreground="White"
+                   
+                   Grid.Column="1" Grid.Row="0"/> Eleman2
+
+        &lt;TextBlock Text="1,1" FontSize="50"
+                   Background="Blue" Foreground="White"
+                   
+                   Grid.Column="1" Grid.Row="1"/> Eleman3
+
+        &lt;TextBlock Text="0,1" FontSize="50"
+                   Background="Red" Foreground="White"
+                   
+                   Grid.Column="0" Grid.Row="1"/> Eleman4
+    &lt;/Grid>
+    -->
+&lt;/Window></code>
+
+Görüntüsü;</pre>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/21 Avalonia Layout Yöneticileri.html/1.png" alt="21.1" width="800px">
+        </div>
+
+        <h2>Canvas</h2>
+        <pre id="preh2">Canvas, kontrolleri serbset şekilde barındırır yani herhangi bir düzeni yoktur. Konumlandırmak için <code>Canvas.Top=""</code>, <code>Canvas.Left=""</code>, <code>Canvas.Right=""</code> ve <code>Canvas.Bottom=""</code> tarafından konumlandırılır.</pre>
+
+        <pre id="preh2">Ancak Dikkat! Grid'e olduğu gibi Canvas'da otomatik pencereye göre büyüme yoktur. Yani Canvas Static işler için uygundur.</pre>
+
+        <pre id="codeh2"><code class="language-xml">&lt;Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="DatasBookonAvalonia.MainWindow"
+        Title="DatasBookonAvalonia">
+    &lt;Canvas>
+	    &lt;TextBlock Text="Eleman1"/>
+
+        &lt;TextBlock Canvas.Left="120"
+                   Text="Eleman2"/>
+
+        &lt;TextBlock Canvas.Top="150"
+                   Text="Eleman3"/>
+
+        &lt;TextBlock Canvas.Bottom="150"
+                   Text="Eleman4"/>
+
+        &lt;TextBlock Canvas.Right="100"
+                   Text="Eleman5"/>
+    &lt;/Canvas>
+
+    &lt;!--
+    &lt;Canvas>
+	    &lt;TextBlock Text="Eleman1"/> Eleman1
+
+        &lt;TextBlock Canvas.Left="120"
+                   Text="Eleman2"/> Eleman2
+
+        &lt;TextBlock Canvas.Top="150"
+                   Text="Eleman3"/> Eleman3
+
+        &lt;TextBlock Canvas.Bottom="150"
+                   Text="Eleman4"/> Eleman4
+
+        &lt;TextBlock Canvas.Right="100"
+                   Text="Eleman5"/> Eleman5
+
+        Birden fazla konumlandırma ile elemanda tanımlayabiliriz.
+    &lt;/Canvas>
+    -->
+&lt;/Window></code>
+
+Görüntüsü;</pre>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/21 Avalonia Layout Yöneticileri.html/2.png" alt="21.2" width="800px">
+        </div>
+
+        <pre id="preh2">Ardından, penceremizi genişletim büyütelim ve farkı görelim.</pre>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; background: transparent; text-align: center; padding: 10px 0; z-index: 100;">
+        <div>
+            <a href="./20 Avalonia Kontroller.html" style="margin-right: 20px; cursor:pointer;">
+                &larr; Önceki
+            </a>
+            <a href="./22 Avalonia Stil ve Tema.html" style="cursor:pointer;">
+                Sonraki &rarr;
+            </a>
+        </div>
+        <div>
+            <p>&copy; 2026 Data's Book</p>
+        </div>
+
+        <div style="position: absolute; right: 20px; bottom: 20px;">
+            <a href="./1 C%23 İçindekiler.html" style="text-decoration: none;">
+                İçindekiler
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
+
+<!-- Muhammet Enes nam-ı diğer Data Delete tarafından sevgi ile yapıldı <3 -->

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data's Book on C#</title>
+
+    <link rel="icon" type="image/x-icon" href="../Sources/favicon.png">
+
+    <script src="../Sources/JS/setBackgroundMedia.js"></script>
+
+    <link rel="stylesheet" href="../Sources/JS/hljs/vs2015.css">
+    <script src="../Sources/JS/hljs/highlight.min.js"></script>
+    <script>
+        window.onload = function() {
+            hljs.highlightAll();
+        };
+    </script>
+
+    <link rel="stylesheet" href="../Sources/CSS/main.css">
+</head>
+<body>
+    <h1>Native Dosya Oluşturulmas ve Kullanımı</h1>
+
+    <div style="height: 100px;"></div>
+    
+    <div id="mainDiv">
+        <h2>Native Dosya Nedir?</h2>
+        <pre id="preh2s">Native veya yerli dosya assasen o yazılım dilinden olmayan ve başka bir yazılım dilinden yazılmış, kütüphane görevi gören dosya formatlarınıdır.</pre>
+
+        <pre id="preh2">Native dosyaların kullanmasının başlıca nedenlerinden bir tanesi de tüm dillerin farklı kullanım ve uzmanlık alanları olduğundan, Native dosyalar ile diller arası bir iletişimi sağlar. Örneğin Java ile bir JavaFX uygulamsı yazıyor olun. Günümüz şartlarında JavaFX uygulamaların görünümü gayet iyi. Fakat Java bir sanal makinede çalıştığından dosya işlemleri Low-Level şekilde yapılamaz. İşte bu yüzden C veya Rust ile yazılan bir dosya işleme sistemi kodlarız ve onu işletim sistemimize göre bir Native dosya çıktısı alır ve JNI ile iletişimizi kurarız.</pre>
+
+        <pre id="preh2">Genel olarak hibrid mimariler yani tek bir dile bağımlı kalmadan büyük projeler geliştirebilir olur. Ayrıca FFI yani C ile uyumluluk denilen bir ölçek vardır. Bu ölçek ne kadar yüksek ise o kadar Native dosya formatı kullanabirliği artar. Bunun nedeni ise neredeyse tüm dillerin temelinde C yatar.</pre>
+
+        <h2>P/Invoke</h2>
+        <pre id="preh2">C# 'daki Native dosyaları kullanımı sağlayan bir kütüphanedir.</pre>
+
+        <pre id="preh2">P/Invoke ile Native dosyaların içeriğine erişebiliriz. Dikkat edilmesi gereken şöyle bir durum vardır ki C# Marshal adı verilen bir String sistemi kullanıyor. Bu yüzden eğer bir Native dosyasından String çıktısı aldıysak <code class="language-csharp">Marshal.PtrToStringAnsi(ptr)</code> yapmamız gerekir.</pre>
+
+        <pre id="preh2">Aşşağıda örnek bir Rust kodu ile yaptığım bir fonksyionu C#'da çağrıcağım.</pre>
+
+        <pre id="codeh2"><code class="language-rust">use std::ffi::CString;
+use std::os::raw::c_char;
+
+#[no_mangle]
+pub extern "C" fn HelloWorld() -> *const c_char {
+    let s = CString::new("Hello World").unwrap();
+    s.into_raw()
+}</code>
+
+Rust kodumuz. Cargo.toml da lib olarak tanımlıyoruz ve <code class="language-bash">cargo build --release</code> ile .dll dosyamızı yani Native dosyamızı elde ediyoruz. Ardından C# projemizde ana dizindeki bin/debug/net10.0 yolunu takip edip dosyamızı oraya atıyoruz.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">using System.Runtime.InteropServices;
+
+namespace DatasBookonCsharp
+{
+    internal class Program
+    {
+        [DllImport("nativeFileExample.dll", CallingConvention = CallingConvention.Cdecl)] // Native dosya ismimiz
+        private static extern IntPtr HelloWorld(); // Rust daki fonksiyonumuz
+
+        public static void Main(string[] args)
+        {
+            var ptr = HelloWorld(); // Fonksiyonu çağırıp çıktıyı alıyoruz
+
+            Console.WriteLine(Marshal.PtrToStringAnsi(ptr)); // Dönen değeri C#'ın kullanabileceği şekilde çevirip yazdırıyoruz
+        }
+    }
+}
+</code></pre>
+
+        <h2>C#'da Native Dosya Oluşturulması</h2>
+        <pre id="preh2">Rust'da yazdığımız kodu C#'da yazalım.</pre>
+
+        <pre id="codeh2"><code id="language-csharp">using System.Runtime.InteropServices;
+using System;
+    
+public class Program
+{
+    [UnmanagedCallersOnly(EntryPoint = "HelloWorld")]
+    public static IntPtr HelloWorld()
+    {
+        return Marshal.StringToHGlobalAnsi("Hello World"); // Okunması için ANSI'e çeviriyoruz
+    }
+}</code>
+
+Visual Studio içerisinde bulunduurduğu projeAdi.csproj adındaki dosyanın içeriğine ise;
+
+<code class="language-xml">&lt;Project Sdk="Microsoft.NET.Sdk">
+	&lt;PropertyGroup>
+		&lt;TargetFramework>net8.0&lt;/TargetFramework>
+		&lt;PlatformTarget>x64&lt;/PlatformTarget>
+		&lt;PublishAot>true&lt;/PublishAot>
+		&lt;NativeLib>Shared&lt;/NativeLib>
+	&lt;/PropertyGroup>
+&lt;/Project>
+</code>
+
+Ardından bir terminal açalım ve 
+<code class="language-bash">dotnet publish -c Release -r win-x64</code>
+
+Derleme tamamlandıktan sonra bin/release//8.0net/win-x64/publish yolunda Native dosyamız olmalıdır.</pre>
+
+        <h2>Kaynakça</h2>
+        <ul>
+            <li><a href="https://learn.microsoft.com/tr-tr/dotnet/standard/native-interop/pinvoke">https://learn.microsoft.com/tr-tr/dotnet/standard/native-interop/pinvoke</a></li>
+            <li><a href="https://learn.microsoft.com/tr-tr/dotnet/standard/native-interop/native-library-loading">https://learn.microsoft.com/tr-tr/dotnet/standard/native-interop/native-library-loading</a></li>
+            <li><a href="https://www.mono-project.com/docs/advanced/pinvoke/">https://www.mono-project.com/docs/advanced/pinvoke/</a></li>
+        </ul>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; background: transparent; text-align: center; padding: 10px 0; z-index: 100;">
+        <div>
+            <a href="./15 C%23 Veritabamı İşlemleri.html" style="margin-right: 20px; cursor:pointer;">
+                &larr; Önceki
+            </a>
+            <a href="./17 Avalonia Giriş.html" style="cursor:pointer;">
+                Sonraki &rarr;
+            </a>
+        </div>
+        <div>
+            <p>&copy; 2026 Data's Book</p>
+        </div>
+
+        <div style="position: absolute; right: 20px; bottom: 20px;">
+            <a href="./1 C%23 İçindekiler.html" style="text-decoration: none;">
+                İçindekiler
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
+
+<!-- Muhammet Enes nam-ı diğer Data Delete tarafından sevgi ile yapıldı <3 -->

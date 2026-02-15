@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data's Book on C#</title>
+
+    <link rel="icon" type="image/x-icon" href="../Sources/favicon.png">
+
+    <script src="../Sources/JS/setBackgroundMedia.js"></script>
+
+    <link rel="stylesheet" href="../Sources/JS/hljs/vs2015.css">
+    <script src="../Sources/JS/hljs/highlight.min.js"></script>
+    <script>
+        window.onload = function() {
+            hljs.highlightAll();
+        };
+    </script>
+
+    <link rel="stylesheet" href="../Sources/CSS/main.css">
+</head>
+<body>
+    <h1>Operatörler</h1>
+
+    <div style="height: 100px;"></div>
+    
+    <div id="mainDiv">
+        <h2>Operatörler Nedir?</h2>
+        <pre id="preh2">Opoeratörler, C# yazılım dilinde basit matematiksel işlemler, karşılaştırma ve verileri mantıksal olarak değerlendirmemizi sağlayan araçlardır.</pre>
+
+        <pre id="preh2">Örneğin operatörler bir hesap makinesindeki işlemleri kolaylıkla yapabilmemizi sağlayan araçlardır. Toplama, çıkarma, bölme ve çarpma gibi işlemlerde kullanılr. Veya bir işlemin sonucunun sıfır mı yoksa başka bir sayımı olup olmadığına bağlı olarak da programlar yazılabilir.</pre>
+
+        <h2>Atama Operatörü</h2>
+        <pre id="preh2">Atama operatörü, bir değişkene bir değer atamak için kullanılır. Sembolü eşittir(=) işaretidir. Matematikdeki eşittirin görevinin aksine, programlamadaki eşittir, sağındaki değeri solundaki değişkene atar. Atama işlemi bir nevi eşitlemektir.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">short KurulusYili = 1923; // 1923 değerini "KurulusYili" adlı bir değişkene atamış olduk</code></pre>
+
+        <h2>Aritmatik Operatörler</h2>
+        <pre id="preh2">Aritmatik operatörler, basit matematiksel işlemleri yapabilen operatörlerdir.</pre>
+
+        <h3>+</h3>
+        <pre id="preh3">Toplama işlemini gerçekleştirir.</pre>
+
+        <pre id="codeh3"><code class="language-csharp">int Toplama = 2 + 2; // 4</code></pre>
+
+        <h3>-</h3>
+        <pre id="preh3">Çıkarma işlemini gerçekleştirir.</pre>
+
+        <pre id="codeh3"><code class="language-csharp">int Cikarma = 3 - 2; // 1</code></pre>
+
+        <h3>*</h3>
+        <pre id="preh3">Çarpma işlemini gerçekleştiri.</pre>
+
+        <pre id="codeh3"><code class="language-csharp">int Carpma = 4 * 2; // 8</code></pre>
+
+        <h3>/</h3>
+        <pre id="preh3">Bölme işlemini gerçekleştirir.</pre>
+
+        <pre id="codeh3"><code class="language-csharp">int Bolme = 2 / 2; // 1</code></pre>
+
+        <h3>Aritmatik Atama Operatörleri</h3>
+        <pre id="preh3">Bu operatör, aritmatik ile atama operatörünü birleştirerek bize kolaylık sağlar. Örneğin bir değişkene 2 sayı eklememiz gerekir. Normal şartlarda yapmamız gereken kod: <code class="language-csharp">int a = a + 2;</code>. Pek tabi bu kod hem uğraştırıcı hemde pratik değil. İşte bu gibi durumlarda aritmatil atama devreye girer ve kodu şu şekilde yazabilir oluruz.</pre>
+
+        <pre id="codeh3"><code class="language-csharp">int a = 2;
+
+a += 2; // 4</code>
+
+Böylelikle kodu daha pratik yazmış olduk.</pre>
+
+        <h2>Karşılaştırma Operatörleri</h2>
+        <pre id="preh2">Karşılaştırma operatörleri; bir değeri, bir diğer değer ile karşılaştırarar sonucundan <code class="language-python">True</code> veya <code class="language-python">False</code> sonucunu veren işlemlerdir.</pre>
+
+        <h3>></h3>
+        <pre id="preh3">Büyük mü, işlemini gerçekleştirir.</pre>
+
+        <pre id="codeh3"><code class="language-csharp">bool Islem = 2 > 3; // False</code></pre>
+
+        <h3><</h3>
+        <pre id="preh3">Küçük mü, işlemini gerçekleştirir.</pre>
+
+        <pre id="codeh3"><code class="language-csharp">bool Islem = 2 <  3; // True</code></pre>
+
+        <h3>>=</h3>
+        <pre id="preh3">Büyük veya eşit mi, işlemini gerçekleştirir.</pre>
+
+        <pre id="codeh3"><code class="language-csharp">bool Islem = 2 >= 2; // True</code></pre>
+
+        <h3><=</h3>
+        <pre id="preh3">Küçük veya eşit mi, işlemini gerçekleştirir.</pre>
+
+        <pre id="codeh3"><code class="language-csharp">bool Islem = 3 <= 2; // False</code></pre>
+
+        <h3>==</h3>
+        <pre id="preh3">Eşit mi, işlemini gerçekleştirir.</pre>
+
+        <pre id="codeh3"><code class="language-csharp">bool Islem = 2 == 2; // True</code></pre>
+
+        <h3>!=</h3>
+        <pre id="preh3">Farklı mı, işlemini gerçekleştirir.</pre>
+
+        <pre id="codeh3"><code class="language-csharp">bool Islem = 23 != 2; // True</code></pre>
+
+        <h2>Mantıksal Operatörler</h2>
+        <pre id="preh2">Mantıksal operatörler, bir Boolean değeri ile başka bir Boolean değerini karşılaştırarak bir <code class="language-python">True</code> veya <code class="language-python">False</code> sonucunu veren operatörlerdir.</pre>
+
+        <h3>!</h3>
+        <pre id="preh3">Durumu tersine çevirir. Yani değer; <code class="language-python">True</code> ise <code class="language-python">False</code>'a, <code class="language-python">False</code> ise <code class="language-python">True</code> değerine çevirir.</pre>
+
+        <pre id="codeh3"><code class="language-csharp">bool dogru = true;
+
+bool yanlis = !dogru; // "dogru"'nun değeri True olduğu için, "yanlis"'in değeri False'tır</code></pre>
+
+        <h3>&&</h3>
+        <pre id="preh3">Ve mantık kapı görevini gerçekleştirir. Aşşağıdaki tabloya göre de değeri belirlenir. Tablodaki birler <code class="language-python">True</code>'yu, sıfırlar ise <code class="language-python">False</code>'ı temsil etmektedir.</pre>
+
+        <table id="tableh3">
+            <thead>
+                <tr>
+                    <th>&ThickSpace;A Değişkeni&ThickSpace;</th>
+                    <th>&ThickSpace;B Değişkeni&ThickSpace;</th>
+                    <th>&ThickSpace;Sonuçları&ThickSpace;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <pre id="codeh3"><code class="language-csharp">bool Islem = true && true; // True
+
+bool Islem2 = true && false; // False</code></pre>
+
+        <h3>||</h3>
+        <pre id="preh3">Veya mantık kapı görevini görürler. Aşşağıdaki tabloya göre de değeri belirlenir. Tablodaki birler <code class="language-python">True</code>'yu, sıfırlar ise <code class="language-python">False</code>'ı temsil etmektedir.</pre>
+
+        <table id="tableh3">
+            <thead>
+                <tr>
+                    <th>&ThickSpace;A Değişkeni&ThickSpace;</th>
+                    <th>&ThickSpace;B Değişkeni&ThickSpace;</th>
+                    <th>&ThickSpace;Sonuçları&ThickSpace;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>0</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <pre id="codeh3"><code class="language-csharp">bool Islem = true || true; // True
+
+bool Islem2 = true || false; // True</code></pre>
+
+        <h2>Ternary</h2>
+        <pre id="preh2">Ternary, değerin <code class="language-python">True</code> veya <code class="language-python">False</code> olduğuna göre tanımlı değeri sonuç olarak veren bir operatördür.</pre>
+
+        <pre id="preh2">Operatörü kullanmak için soru işareti(?) ve iki nokta(:) kullanılarak gerçekleştirir. Soru işaretinin solundaki değer <code class="language-python">True</code> ise, iki noktanın solundaki değeri sonuç olarak verir; Soru işaretinin solundaki değer <code class="language-python">False</code> ise, iki noktanın sağındaki değeri sonuç olarak verir.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">string a = true ? "T" : "F"; // "T"
+
+string b = false ? "T" : "F"; // "F"</code></pre>
+        
+        <pre id="preh2">Böylelikle çok yönlülük özelliğini sağlar. Koşullara göre değerleri değiştirir.</pre>
+
+        <h2>Yorum Operatörleri</h2>
+        <pre id="preh2">Yorum operatörleri, makineler için hiçbir ifade etmez iken, insanlar için; O kodun hangi işleve sahip olduğunu anlatmamızı sağlayan operatörlerdir. Çift eğik çizgi(//) ile yapılır.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">int a = 12; // Bu değişkenin çoğu kısımda kullanılır</code>
+        
+Şeklinde kullanılır. Böylelikle yazımlımcılar arasında kodlarını anlatmak için hayati önem taşır.</pre>
+
+        <pre id="preh2">Bu eğitim serisinde ve diğer Data's Books, kitaplarında bol bol görebilirsiniz.</pre>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; background: transparent; text-align: center; padding: 10px 0; z-index: 100;">
+        <div>
+            <a href="./4 C%23 Değişkenler.html" style="margin-right: 20px; cursor:pointer;">
+                &larr; Önceki
+            </a>
+            <a href="./6 C%23 Karar Yapıları.html" style="cursor:pointer;">
+                Sonraki &rarr;
+            </a>
+        </div>
+        <div>
+            <p>&copy; 2026 Data's Book</p>
+        </div>
+
+        <div style="position: absolute; right: 20px; bottom: 20px;">
+            <a href="./1 C%23 İçindekiler.html" style="text-decoration: none;">
+                İçindekiler
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
+
+<!-- Muhammet Enes nam-ı diğer Data Delete tarafından sevgi ile yapıldı <3 -->

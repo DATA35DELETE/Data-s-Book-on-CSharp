@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data's Book on C#</title>
+
+    <link rel="icon" type="image/x-icon" href="../Sources/favicon.png">
+
+    <script src="../Sources/JS/setBackgroundMedia.js"></script>
+
+    <link rel="stylesheet" href="../Sources/JS/hljs/vs2015.css">
+    <script src="../Sources/JS/hljs/highlight.min.js"></script>
+    <script>
+        window.onload = function() {
+            hljs.highlightAll();
+        };
+    </script>
+
+    <link rel="stylesheet" href="../Sources/CSS/main.css">
+</head>
+<body>
+    <h1>Kurulum ve İlk Proje</h1>
+
+    <div style="height: 100px;"></div>
+    
+    <div id="mainDiv">
+        <h2>Eklenti Paketini İndirme</h2>
+        <pre id="preh2">Avalonia kullanabilmemiz için ilk önce eklenti paketini indirmemiz gerekir. Bunun için Visual Studio'muzu açalım ve "Kodsuz olarak devam et" tıklayalım. Ardından ana ekranda "Uzantılar > Uzantıları Yönet" yolunu izliyelim. Ardından gelen menüde "Avalonia" aratalım. Avalonia ikonlu uzantıyı "İndir" butonuna basalım ve Visual Studio'yu kapatalım. İndirmeden ardından artık Avalonia'yı kullanabiliriz. Normal proje oluşturduğumuz gibi bu sefer proje </pre>
+    
+        <h2>Proje Yapısı</h2>
+        <pre id="preh2">Projemiz açıldığında bizi karşılıcak pencere MainWindow.axaml kod dosyasıdır. Bu kod dosyası AXAML tabanlı olan kod dosyamızdır. Solda görmüş olduğumuz üzere yazılı kodlar, sağda ise kodlarımızın ön gösterimi yer almaktadır.</pre>
+
+        <pre id="preh2">Bir diğer önemli olan kısım ise MainWindow.axaml.cs dosyasıdır. Bu kısım ise MainWindow.axaml dosyasının Backend'didir. Yani arkada çalışan kodlardır.</pre>
+
+        <pre id="codeh2">
+            
+İlk açılıştaki kodlar
+
+<code class="language-csharp">using Avalonia.Controls;
+
+namespace DatasBookonAvalonia // Ana proje ismimiz
+{
+    public partial class MainWindow : Window // Ana sınıfımız
+    {
+        public MainWindow() // İlk çalışan fonksiyon
+        {
+            InitializeComponent(); // Bizim MainWindow.axaml dosyasını bir pencereye dönüştür ve görüntüle
+        }
+    }
+}</code></pre>
+
+        
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; background: transparent; text-align: center; padding: 10px 0; z-index: 100;">
+        <div>
+            <a href="./17 Avalonia Giriş.html" style="margin-right: 20px; cursor:pointer;">
+                &larr; Önceki
+            </a>
+            <a href="./19 Avaloina XAML Temelleri.html" style="cursor:pointer;">
+                Sonraki &rarr;
+            </a>
+        </div>
+        <div>
+            <p>&copy; 2026 Data's Book</p>
+        </div>
+
+        <div style="position: absolute; right: 20px; bottom: 20px;">
+            <a href="./1 C%23 İçindekiler.html" style="text-decoration: none;">
+                İçindekiler
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
+
+<!-- Muhammet Enes nam-ı diğer Data Delete tarafından sevgi ile yapıldı <3 -->

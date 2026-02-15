@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data's Book on C#</title>
+
+    <link rel="icon" type="image/x-icon" href="../Sources/favicon.png">
+
+    <script src="../Sources/JS/setBackgroundMedia.js"></script>
+
+    <link rel="stylesheet" href="../Sources/JS/hljs/vs2015.css">
+    <script src="../Sources/JS/hljs/highlight.min.js"></script>
+    <script>
+        window.onload = function() {
+            hljs.highlightAll();
+        };
+    </script>
+
+    <link rel="stylesheet" href="../Sources/CSS/main.css">
+</head>
+<body>
+    <h1>Döngüler</h1>
+
+    <div style="height: 100px;"></div>
+    
+    <div id="mainDiv">
+        <h2>Döngüler</h2>
+        <pre id="preh2">Döngüler, kendini sürekli veya belirli bir miktar kadar tekrarlanan yapılardır. Döngüler, program akışınıda engeller. Bu sebeble bir döngü çalışır iken diğer kodlar, döngünün bitmesi beklerler.</pre>
+
+        <pre id="preh2">Genel olarak; Kod tekrarlarını engeller. Örneğin kullanıcıya yüz kere <code class="language-csharp">Console.WriteLine("Hoşgeldin");</code> mesajı yazdırmak istiyelim. Peki yüz satır bu komutumu yazacağız. Tabiki hayır!</pre>
+
+        <pre id="codeh2"><code class="language-csharp">for (int i = 0; i <= 100; i++)
+{
+    Console.WriteLine("Hoşgeldin");
+}</code>
+
+Böylelikle kodumuz yüz satırdan dört satıra düşmüş oldu.</pre>
+
+        <h2>While</h2>
+        <pre id="preh2">While, parantezlerindeki Boolean değeri <code class="language-python">True</code> olduğu süreççe kodlarını çalıştırır.</pre>
+
+        <pre id="preh2">DİKKAT!!! : While döngüsünde kısır döngü ihtimali vardır. Kısır döngüler programı çökertebilir.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">int a = 2;
+
+while (a == 2) // Şartımız, a'nın değeri iki olduğu süreççe kodlarını çalıştırır
+{
+    Console.WriteLine("a = 2");
+}</code></pre>
+
+        <h2>For</h2>
+        <pre id="preh2">For, While gibi Boolean değere bakmaz. For, belirlenmiş miktar kadar kodlarını çalıştırır.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">for (int i = 0; i <= 100; i++)
+{
+    Console.WriteLine("Hoşgeldin");
+}</code></pre>
+
+        <pre id="preh2">Yukarıda örneğini verdiğimiz kodda, For yüz kere kodlarını çalıştırmakta ve Konsola yüz kere "Hoşgeldin" yazdırmaktadır.</pre>
+
+        <h3>Foreach</h3>
+        <pre id="preh3">Foreach, For döngüsünün bir alt türüdür. Bu yapı ise belirlenen liste elemanlarını her bir dönüşte, bir sonraki elemana geçen bir döngüdür. "Listeler" sayfasında daha detaylı anlatacağız.</pre>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; background: transparent; text-align: center; padding: 10px 0; z-index: 100;">
+        <div>
+            <a href="./6 C%23 Karar Yapıları.html" style="margin-right: 20px; cursor:pointer;">
+                &larr; Önceki
+            </a>
+            <a href="./8 C%23 Listeler.html" style="cursor:pointer;">
+                Sonraki &rarr;
+            </a>
+        </div>
+        <div>
+            <p>&copy; 2026 Data's Book</p>
+        </div>
+
+        <div style="position: absolute; right: 20px; bottom: 20px;">
+            <a href="./1 C%23 İçindekiler.html" style="text-decoration: none;">
+                İçindekiler
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
+
+<!-- Muhammet Enes nam-ı diğer Data Delete tarafından sevgi ile yapıldı <3 -->

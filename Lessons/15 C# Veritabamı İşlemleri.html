@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data's Book on C#</title>
+
+    <link rel="icon" type="image/x-icon" href="../Sources/favicon.png">
+
+    <script src="../Sources/JS/setBackgroundMedia.js"></script>
+
+    <link rel="stylesheet" href="../Sources/JS/hljs/vs2015.css">
+    <script src="../Sources/JS/hljs/highlight.min.js"></script>
+    <script>
+        window.onload = function() {
+            hljs.highlightAll();
+        };
+    </script>
+
+    <link rel="stylesheet" href="../Sources/CSS/main.css">
+</head>
+<body>
+    <h1>Veritabanı İşlemleri</h1>
+
+    <div style="height: 100px;"></div>
+    
+    <div id="mainDiv">
+        <h2>Veritabanı Nedir?</h2>
+        <pre id="preh2">Veritabanları, verilerin bir bütün olarak saklandığı sistemlerdir.</pre>
+
+        <pre id="preh2">Veritabanları genelde sunucularda, kullanıcıların verilerini saklamak için kullanılır. Kullanıcı adları, şifreleri gibi veriler saklanır. Veritabanlarında bir sorgu dilin olan SQL kullanılır.</pre>
+
+        <h2>SQL Komutları</h2>
+        <pre id="preh2">SQL bilmeden veritabanlaryıla işlemler imkansızdır. Bu yüzden Data's Book on SQL eğitimime bakınız.</pre>
+
+        <pre id="preh2">Aynı zamanda SQL dilimiz bir GUI arayüzünü görüntülücek bir araca da ihtiyacımız var. Onunda uyumlulukları sayesinde MariaDB ve HeidiSQL ile yapacağız. Bu yüzden Data's Book on MariaDB bakınız.</pre>
+
+        <h2>MariaDB Veritabanına Bağlantı Kurma</h2>
+        <pre id="preh2">C# ile MariaDB'yi bağlanamadan önce indirmemiz gerekbir kütüphane var. İlk olarak Visual Studio'muzda NuGet paket yöneticisine gidelim. Arama kutusuna "MySqlConnector" yazalım ve ilk çıkanı indirip projemize dahil edelim.</pre>
+
+        <pre id="preh2">Bağlantı için, veritabanımızın adresi gereklidir. MariaDB'den bir veritabanı oluşturalım ve bağlantı adresini kopyalalım. Ayrıca <code>Using</code>'ide bu kısımda kullanabiliyoruz. Ardından C# tarafında;</pre>
+
+        <pre id="codeh2"><code class="language-csharp">using System;
+using MySqlConnector; // Gerekli kütüphanemiz. Çünkü MariaDB MySQL kullanıyor
+
+namespace DatasBookonCsharp
+{
+    internal class Program
+    {
+        public static void Main(string[] args)
+        {
+            string conc = 
+                "Server=127.0.0.1;" + // Sunucumuzun adresi
+                "Port=3306;" + // Portu
+                "Database=users;" + // Kullanıcağımız Database
+                "User=root;" + // Yetkimiz
+                "Password=****;"; // Database şifremiz
+
+            using (MySqlConnection c = new MySqlConnection(conc)) // Bağlantı metni ile MySQL bağlantısı kur
+            {
+                c.Open(); // Kurulan bağlantıyı aç
+            }
+        }
+    }
+}
+</code></pre>
+
+        <pre id="preh2">Hata vermediği taktirde bağlantı sorunsuz olmuş demektir.</pre>
+
+        <h2>Veri Ekleme (INSERT)</h2>
+        <pre id="preh2">İlk önce verimizi ekliceğimiz tabloya değişkenlerimizi girelim. Ben name ve pass yaptım. Çünkü onların üzerinden bir işlem yapacağım. Şimdi kullanicilar'a, kullanıcıdan gelen verileri ekliyelim.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">string conc = 
+    "Server=127.0.0.1;" + // Sunucumuzun adresi
+    "Port=3306;" + // Portu
+    "Database=users;" + // Kullanıcağımız Database
+    "User=root;" + // Yetkimiz
+    "Password=****;"; // Database şifremiz
+
+using (MySqlConnection c = new MySqlConnection(conc)) // Bağlantı metni ile MySQL bağlantısı kur
+{
+    c.Open(); // Kurulan bağlantıyı aç
+
+    Console.Write("Kullanıcı isminiz: ");
+    string username = Console.ReadLine();
+
+    Console.Write("Şifreniz: ");
+    string pass = Console.ReadLine();
+
+    string qry = $"INSERT INTO kullanicilar (name, pass) VALUES ('{username}', '{pass}')"; // SQL Sorgumuz
+
+    MySqlCommand cmd = new MySqlCommand(qry, c); // Sorgumuzu oluşturur 
+    cmd.ExecuteNonQuery(); // Sorgumuzu çalıştırır
+}</code></pre>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/15 C%23 Veritbanları İşlemleri.html/1.png" alt="15.1" width="800px">
+        </div>
+
+        <pre id="preh2">sonucunda</pre>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/15 C%23 Veritbanları İşlemleri.html/2.png" alt="15.2" width="800px">
+        </div>
+
+        <pre id="preh2">Veri eklenmiiş oldu lakin, bu sistemde SqlInjection yani Sql sorgusunu kötü niyetli yazılma olasılığı var. Bunun için kodumuzu şu şekilde değiştirelim.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">string conc = 
+    "Server=127.0.0.1;" + // Sunucumuzun adresi
+    "Port=3306;" + // Portu
+    "Database=users;" + // Kullanıcağımız Database
+    "User=root;" + // Yetkimiz
+    "Password=****;"; // Database şifremiz
+
+using (MySqlConnection c = new MySqlConnection(conc)) // Bağlantı metni ile MySQL bağlantısı kur
+{
+    c.Open(); // Kurulan bağlantıyı aç
+
+    Console.Write("Kullanıcı isminiz: ");
+    string username = Console.ReadLine();
+
+    Console.Write("Şifreniz: ");
+    string pass = Console.ReadLine();
+
+    string qry = "INSERT INTO kullanicilar (name, pass) VALUES (@name, @pass)"; // SQL Sorgumuz
+
+    MySqlCommand cmd = new MySqlCommand(qry, c); // Sorgumuzu oluşturur 
+
+    cmd.Parameters.AddWithValue("name", username); // Sorgunun @name ile işaretlenen kısma kullanıcının girdisini koy
+    cmd.Parameters.AddWithValue("pass", pass); // Sorgunun @name ile işaretlenen kısma kullanıcının girdisini koy
+
+    // Sorgu güvenli hale getirildi. SqlInjection saldırı önlendi
+
+    cmd.ExecuteNonQuery(); // Sorgumuzu çalıştırır
+}</code></pre>
+
+        <h2>Veri Sorgulama (SELECT)</h2>
+        <pre id="preh2">SELECT, tablolardaki verileri çekmemizi sağlar.</pre>
+
+        <pre id="preh2">Aynı örnekten gideceksek, kullanıcının girdiği bilgiler veritabanından çekerek ona iletsin</pre>
+    
+        <pre id="codeh2"><code class="language-csharp">string conc = 
+    "Server=127.0.0.1;" + // Sunucumuzun adresi
+    "Port=3306;" + // Portu
+    "Database=users;" + // Kullanıcağımız Database
+    "User=root;" + // Yetkimiz
+    "Password=****;"; // Database şifremiz
+
+using (MySqlConnection c = new MySqlConnection(conc)) // Bağlantı metni ile MySQL bağlantısı kur
+{
+    c.Open(); // Kurulan bağlantıyı aç
+
+    Console.Write("Kullanıcı isminiz: ");
+    string username = Console.ReadLine();
+
+    Console.Write("Şifreniz: ");
+    string pass = Console.ReadLine();
+
+    string qry = "INSERT INTO kullanicilar (name, pass) VALUES (@name, @pass)"; // SQL Sorgumuz
+
+    MySqlCommand cmd = new MySqlCommand(qry, c); // Sorgumuzu oluşturur 
+
+    cmd.Parameters.AddWithValue("name", username); // Sorgunun @name ile işaretlenen kısma kullanıcının girdisini koy
+    cmd.Parameters.AddWithValue("pass", pass); // Sorgunun @name ile işaretlenen kısma kullanıcının girdisini koy
+
+    cmd.ExecuteNonQuery(); // Sorgumuzu çalıştırır
+
+    Console.Write("\n"); // Ayırma satırı
+
+    string qry2 = "SELECT name, pass FROM kullanicilar WHERE name=@name"; // Sorgumuz. Sorgumuz bize sadece kullancının girdiği kullanıcı ismindeki sütünündaki verileri getirecektir
+
+    cmd = new MySqlCommand(qry2, c); // Sorgumuzu çalıştırabilir hale getiriyoruz
+    cmd.Parameters.AddWithValue("name",username); // Gerekli kısımları dolduruyoruz
+
+    using (MySqlDataReader msdr = cmd.ExecuteReader()) // DataReader ile dönen veriyi okuyoruz
+    {
+        while (msdr.Read()) // Sırayla oku
+        {
+            Console.WriteLine("Name: " + msdr[0]); // Name'i yazdır
+            Console.WriteLine("Password: " + msdr[1]); // Password'u yazdır
+        }
+    }
+}</code></pre>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/15 C%23 Veritbanları İşlemleri.html/3.png" alt="15.3" width="800px">
+        </div>
+
+        <h2>Veri Güncelleme (UPDATE)</h2>
+        <pre id="preh2">UPDATE, var olan bir veriyi günceller.</pre>
+
+        <pre id="preh2">Örneğimize yeni bir özellik olarak, kullanıcının girdiği kullanıcı ismini değiştirme işlevi ekliyelim.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">string conc = 
+    "Server=127.0.0.1;" + // Sunucumuzun adresi
+    "Port=3306;" + // Portu
+    "Database=users;" + // Kullanıcağımız Database
+    "User=root;" + // Yetkimiz
+    "Password=****;"; // Database şifremiz
+
+using (MySqlConnection c = new MySqlConnection(conc)) // Bağlantı metni ile MySQL bağlantısı kur
+{
+    c.Open(); // Kurulan bağlantıyı aç
+
+    Console.Write("Kullanıcı isminiz: ");
+    string username = Console.ReadLine();
+
+    Console.Write("Şifreniz: ");
+    string pass = Console.ReadLine();
+
+    string qry = "INSERT INTO kullanicilar (name, pass) VALUES (@name, @pass)"; // SQL Sorgumuz
+
+    MySqlCommand cmd = new MySqlCommand(qry, c); // Sorgumuzu oluşturur 
+
+    cmd.Parameters.AddWithValue("name", username); // Sorgunun @name ile işaretlenen kısma kullanıcının girdisini koy
+    cmd.Parameters.AddWithValue("pass", pass); // Sorgunun @name ile işaretlenen kısma kullanıcının girdisini koy
+
+    cmd.ExecuteNonQuery(); // Sorgumuzu çalıştırır
+
+    Console.Write("\n"); // Ayırma satırı
+
+    string qry2 = "SELECT name, pass FROM kullanicilar WHERE name=@name"; // Sorgumuz. Sorgumuz bize sadece kullancının girdiği kullanıcı ismindeki sütünündaki verileri getirecektir
+
+    cmd = new MySqlCommand(qry2, c); // Sorgumuzu çalıştırabilir hale getiriyoruz
+    cmd.Parameters.AddWithValue("name",username); // Gerekli kısımları dolduruyoruz
+
+    using (MySqlDataReader msdr = cmd.ExecuteReader()) // DataReader ile dönen veriyi okuyoruz
+    {
+        while (msdr.Read()) // Sırayla oku
+        {
+            Console.WriteLine("Name: " + msdr[0]); // Name'i yazdır
+            Console.WriteLine("Password: " + msdr[1]); // Password'u yazdır
+        }
+    }
+
+    Console.Write("\n"); // Ayırma satırı
+
+    Console.Write("Yeni kullanıcı isminiz: "); // Yeni kullanıcı ismi isteme
+    string NewUsername = Console.ReadLine();
+
+    string qry3 = "UPDATE kullanicilar SET name=@newname WHERE name=@name"; // Girilen kullanıcı ismi güncelleme sorgumuz
+
+    cmd = new MySqlCommand (qry3, c);
+    cmd.Parameters.AddWithValue("newname", NewUsername);
+    cmd.Parameters.AddWithValue("name",username);
+
+    cmd.ExecuteNonQuery();
+}</code></pre>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/15 C%23 Veritbanları İşlemleri.html/4.png" alt="15.4" width="800px">
+        </div>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/15 C%23 Veritbanları İşlemleri.html/2.png" alt="15.5" width="800px">
+        </div>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/15 C%23 Veritbanları İşlemleri.html/5.png" alt="15.6" width="800px">
+        </div>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/15 C%23 Veritbanları İşlemleri.html/6.png" alt="15.7" width="800px">
+        </div>
+
+        <h2>Veri Silme (DELETE)</h2>
+        <pre id="preh2">DELETE, veri silmemizi sağlar.</pre>
+
+        <pre id="preh2">Projemize son bir dokunuş olarak "Bu hesabı silmek istiyor musunuz? (y: Evet(Varsayılan), h: Hayır): " ile de hesap silme imkanı sunalım.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">string conc = 
+    "Server=127.0.0.1;" + // Sunucumuzun adresi
+    "Port=3306;" + // Portu
+    "Database=users;" + // Kullanıcağımız Database
+    "User=root;" + // Yetkimiz
+    "Password=****;"; // Database şifremiz
+
+using (MySqlConnection c = new MySqlConnection(conc)) // Bağlantı metni ile MySQL bağlantısı kur
+{
+    c.Open(); // Kurulan bağlantıyı aç
+
+    Console.Write("Kullanıcı isminiz: ");
+    string username = Console.ReadLine();
+
+    Console.Write("Şifreniz: ");
+    string pass = Console.ReadLine();
+
+    string qry = "INSERT INTO kullanicilar (name, pass) VALUES (@name, @pass)"; // SQL Sorgumuz
+
+    MySqlCommand cmd = new MySqlCommand(qry, c); // Sorgumuzu oluşturur 
+
+    cmd.Parameters.AddWithValue("name", username); // Sorgunun @name ile işaretlenen kısma kullanıcının girdisini koy
+    cmd.Parameters.AddWithValue("pass", pass); // Sorgunun @name ile işaretlenen kısma kullanıcının girdisini koy
+
+    cmd.ExecuteNonQuery(); // Sorgumuzu çalıştırır
+
+    Console.Write("\n"); // Ayırma satırı
+
+    string qry2 = "SELECT name, pass FROM kullanicilar WHERE name=@name"; // Sorgumuz. Sorgumuz bize sadece kullancının girdiği kullanıcı ismindeki sütünündaki verileri getirecektir
+
+    cmd = new MySqlCommand(qry2, c); // Sorgumuzu çalıştırabilir hale getiriyoruz
+    cmd.Parameters.AddWithValue("name",username); // Gerekli kısımları dolduruyoruz
+
+    using (MySqlDataReader msdr = cmd.ExecuteReader()) // DataReader ile dönen veriyi okuyoruz
+    {
+        while (msdr.Read()) // Sırayla oku
+        {
+            Console.WriteLine("Name: " + msdr[0]); // Name'i yazdır
+            Console.WriteLine("Password: " + msdr[1]); // Password'u yazdır
+        }
+    }
+
+    Console.Write("\n"); // Ayırma satırı
+
+    Console.Write("Yeni kullanıcı isminiz: "); // Yeni kullanıcı ismi isteme
+    string NewUsername = Console.ReadLine();
+
+    string qry3 = "UPDATE kullanicilar SET name=@newname WHERE name=@name"; // Girilen kullanıcı ismi güncelleme sorgumuz
+
+    cmd = new MySqlCommand (qry3, c);
+    cmd.Parameters.AddWithValue("newname", NewUsername);
+    cmd.Parameters.AddWithValue("name",username);
+
+    cmd.ExecuteNonQuery();
+
+    Console.Write("\n"); // Ayırma satırı
+
+    Console.Write("Bu hesabı silmek istiyor musunuz? (y: Evet(Varsayılan), h: Hayır): ");
+    string secim = Console.ReadLine();
+
+    if(secim == "h")
+    {
+        Console.WriteLine("Hesap silinmedi");
+    }
+    else
+    {
+        string qry4 = "DELETE FROM kullanicilar WHERE name=@name"; // Oluşturulan hesabı silme sorgumuz
+
+        cmd = new MySqlCommand(qry4, c);
+        cmd.Parameters.AddWithValue("name", NewUsername);
+
+        cmd.ExecuteNonQuery();
+    }
+}</code></pre>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/15 C%23 Veritbanları İşlemleri.html/4.png" alt="15.8" width="800px">
+        </div>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/15 C%23 Veritbanları İşlemleri.html/2.png" alt="15.9" width="800px">
+        </div>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/15 C%23 Veritbanları İşlemleri.html/5.png" alt="15.10" width="800px">
+        </div>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/15 C%23 Veritbanları İşlemleri.html/6.png" alt="15.11" width="800px">
+        </div>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/15 C%23 Veritbanları İşlemleri.html/7.png" alt="15.12" width="800px">
+        </div>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/15 C%23 Veritbanları İşlemleri.html/8.png" alt="15.13" width="800px">
+        </div>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; background: transparent; text-align: center; padding: 10px 0; z-index: 100;">
+        <div>
+            <a href="./14 C%23 Dosya İşlemleri.html" style="margin-right: 20px; cursor:pointer;">
+                &larr; Önceki
+            </a>
+            <a href="./16 C%23 Native Dosya Oluşturulma ve Kullanımı.html" style="cursor:pointer;">
+                Sonraki &rarr;
+            </a>
+        </div>
+        <div>
+            <p>&copy; 2026 Data's Book</p>
+        </div>
+
+        <div style="position: absolute; right: 20px; bottom: 20px;">
+            <a href="./1 C%23 İçindekiler.html" style="text-decoration: none;">
+                İçindekiler
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
+
+<!-- Muhammet Enes nam-ı diğer Data Delete tarafından sevgi ile yapıldı <3 -->

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data's Book on C#</title>
+
+    <link rel="icon" type="image/x-icon" href="../Sources/favicon.png">
+
+    <script src="../Sources/JS/setBackgroundMedia.js"></script>
+
+    <link rel="stylesheet" href="../Sources/JS/hljs/vs2015.css">
+    <script src="../Sources/JS/hljs/highlight.min.js"></script>
+    <script>
+        window.onload = function() {
+            hljs.highlightAll();
+        };
+    </script>
+
+    <link rel="stylesheet" href="../Sources/CSS/main.css">
+</head>
+<body>
+    <h1>Kontroller</h1>
+
+    <div style="height: 100px;"></div>
+    
+    <div id="mainDiv">
+        <h2>Kontroller Nedir?</h2>
+        <pre id="preh2">Avalonia'da her yazı veya fotoğraf içerin UI bileşenleri kontrol adı verilir.</pre>
+
+        <pre id="preh2">Bu kontroller genelde bir Layout'a bağlıdırlar. "Layout Yöneticileri" sayfasında daha detaylı işleceğiz.</pre>
+
+        <h2>TexBlock</h2>
+        <pre id="preh2">TextBlock, yazı görüntülemek için kullanılır.</pre>
+
+        <pre id="codeh2"><code class="language-xml">&lt;Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="DatasBookonAvalonia.MainWindow"
+        Title="DatasBookonAvalonia">
+    &lt;TextBlock Width="100"
+                  Height="100"
+                  Text="Yazi"
+                  Background="Green"
+                  Foreground="White"
+                  FontSize="20"
+                  FontWeight="Bold"/>
+
+    &lt;!--
+    &lt;TextBlock Kontrolümüz
+               Width="100" Genişliği
+               Height="100" Yükseliği
+               Text="Yazi" Yazısı
+               Background="Green" Arkaplan rengi
+               Foreground="White" Yazu rengi
+               FontSize="20" Yazı boyutu
+               FontWeight="Bold" Yazı kalınlığı
+               /> 
+    -->
+&lt;/Window></code>
+
+Görüntüsü ise;</pre>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/20 Avalonia Kontroller.html/1.png" alt="20.1" width="800px">
+        </div>
+
+            <h2>TextBox</h2>
+    <pre id="preh2">TextBox, TextBlock'un kullanıcı tarafından yazı yazılabilir versiyonudur.</pre>
+
+    <pre id="codeh2"><code class="language-xml">&lt;Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="DatasBookonAvalonia.MainWindow"
+        Title="DatasBookonAvalonia">
+    &lt;TextBox Width="100"
+             Height="100"
+             Background="Green"
+             Foreground="White"
+             FontSize="20"
+             FontWeight="Bold"
+
+             TextWrapping="WrapWithOverflow"/>
+
+    &lt;!--
+    &lt;TextBox Width="100"
+             Height="100"
+             Background="Green"
+             Foreground="White"
+             FontSize="20"
+             FontWeight="Bold"
+
+             TextWrapping="WrapWithOverflow" Yazı eğer taşarsa bir alt satıra geçmesini sağlar
+             />
+    -->
+&lt;/Window></code>
+
+Görüntüsü;</pre>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/20 Avalonia Kontroller.html/2.png" alt="20.2" width="800px">
+        </div>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/20 Avalonia Kontroller.html/3.png" alt="20.3" width="800px">
+        </div>
+
+        <h2>Button</h2>
+        <pre id="pre2">Button, kullanıcıya etkileşime girebilceği bir buton verir.</pre>
+
+        <pre id="codeh2"><code class="language-xml">&lt;Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="DatasBookonAvalonia.MainWindow"
+        Title="DatasBookonAvalonia">
+    &lt;Button
+            Width="100"
+            Height="100"
+            Background="Green"
+            Foreground="White"
+            FontSize="20"
+            FontWeight="Bold"
+            
+            Content="Tıkla"
+            Click="Button_Click"/>
+
+    &lt;!--
+    &lt;Button
+            Width="100"
+            Height="100"
+            Background="Green"
+            Foreground="White"
+            FontSize="20"
+            FontWeight="Bold"
+            
+            Content="Tıkla" Yazısı (Text yerine Content vardır)
+            Click="Button_Click" Kullanıcı butona basarsa çalışacak fonksiyon/>
+    -->
+&lt;/Window></code>
+
+C# tarafı
+
+<code class="language-csharp">using Avalonia.Controls;
+
+namespace DatasBookonAvalonia
+{
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        // Butona tıklandığında çalışacak fonksiyon
+        private void Button_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            // Kodlar
+        }
+    }
+}</code>
+
+Görüntüsü;</pre>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/20 Avalonia Kontroller.html/4.png" alt="20.4" width="800">
+        </div>
+
+        <h2>ListBox</h2>
+        <pre id="preh2">ListBox, birden fazla kontrollü bir liste şeklinde sıralar. Scroll ile kontrolleri fazlalaştıkça ortaya çıkar ve aşağı kaydırmamızı sağlar. Ayrıca dikey eksende de Scroll vardır.</pre>
+
+        <pre id="codeh2"><code class="language-xml">&lt;Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="DatasBookonAvalonia.MainWindow"
+        Title="DatasBookonAvalonia">
+    &lt;ListBox Width="150">
+		&lt;TextBlock Width="150" Height="20"
+                   Background="Green"/>
+        &lt;TextBlock Width="150" Height="40"
+                   Background="Yellow"/>
+        &lt;TextBlock Width="150" Height="10"
+                   Background="Red"/>
+        &lt;TextBlock Width="150" Height="100"
+                   Background="Blue"/>
+        &lt;TextBlock Width="150" Height="150"
+                   Background="Pink"/>
+    &lt;/ListBox>
+
+    &lt;!--
+    &lt;ListBox Width="150"> ListBox
+		&lt;TextBlock Width="150" Height="20"
+                   Background="Green"/> Eleman1
+        &lt;TextBlock Width="150" Height="40" 
+                   Background="Yellow"/> Eleman2
+        &lt;TextBlock Width="150" Height="10" 
+                   Background="Red"/> Eleman 3
+        &lt;TextBlock Width="150" Height="100"
+                   Background="Blue"/> Eleman 4
+        &lt;TextBlock Width="150" Height="150"
+                   Background="Pink"/> Eleman 5
+    &lt;/ListBox>
+    -->
+&lt;/Window></code></pre>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/20 Avalonia Kontroller.html/5.png" alt="20.5" width="800">
+        </div>
+
+        <h2>CheckBox</h2>
+        <pre id="preh2">Bir onay kutusu sağlar.</pre>
+
+        <pre id="preh2"><code class="language-xml">&lt;Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="DatasBookonAvalonia.MainWindow"
+        Title="DatasBookonAvalonia">
+    &lt;CheckBox 
+             Background="Green"
+             Foreground="White"
+             FontSize="20"
+             FontWeight="Bold"
+             
+             IsChecked="True"/>
+
+    &lt;!--
+    &lt;CheckBox 
+             Background="Green"
+             Foreground="White"
+             FontSize="20"
+             FontWeight="Bold"
+             
+             IsChecked="True/False" Seçilip olup olmadığı
+
+             Chekbox'da genişlik ve yükselik verilmez. Otomatik boyutlanır
+             />
+    -->
+&lt;/Window></code></pre>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/20 Avalonia Kontroller.html/6.png" alt="20.6" width="800">
+        </div>
+
+        <h2>RadioButton</h2>
+        <pre id="preh2">Yuvarlak bir buton sağlar. Bir kere seçildiğinde geri kapanamaz. Ancak başka RadioButton seçilene kadar.</pre>
+
+        <pre id="codeh2"><code class="language-xml">&lt;Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="DatasBookonAvalonia.MainWindow"
+        Title="DatasBookonAvalonia">
+    &lt;RadioButton 
+             Background="Green"
+             Foreground="White"
+             FontSize="20"
+             FontWeight="Bold"
+             
+             IsChecked="False"/>
+
+    &lt;!--
+    &lt;RadioButton
+             Background="Green"
+             Foreground="White"
+             FontSize="20"
+             FontWeight="Bold"
+             
+             IsChecked="True/False" Seçilip olup olmadığı
+
+             RadioButton'da genişlik ve yükselik verilmez. Otomatik boyutlanır
+             />
+    -->
+&lt;/Window></code></pre>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/20 Avalonia Kontroller.html/7.png" alt="20.7" width="800">
+        </div>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; background: transparent; text-align: center; padding: 10px 0; z-index: 100;">
+        <div>
+            <a href="./19 Avaloina XAML Temelleri.html" style="margin-right: 20px; cursor:pointer;">
+                &larr; Önceki
+            </a>
+            <a href="./21 Avalonia Layout Yöneticileri.html" style="cursor:pointer;">
+                Sonraki &rarr;
+            </a>
+        </div>
+        <div>
+            <p>&copy; 2026 Data's Book</p>
+        </div>
+
+        <div style="position: absolute; right: 20px; bottom: 20px;">
+            <a href="./1 C%23 İçindekiler.html" style="text-decoration: none;">
+                İçindekiler
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
+
+<!-- Muhammet Enes nam-ı diğer Data Delete tarafından sevgi ile yapıldı <3 -->

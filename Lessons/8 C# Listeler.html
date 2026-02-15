@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data's Book on C#</title>
+
+    <link rel="icon" type="image/x-icon" href="../Sources/favicon.png">
+
+    <script src="../Sources/JS/setBackgroundMedia.js"></script>
+
+    <link rel="stylesheet" href="../Sources/JS/hljs/vs2015.css">
+    <script src="../Sources/JS/hljs/highlight.min.js"></script>
+    <script>
+        window.onload = function() {
+            hljs.highlightAll();
+        };
+    </script>
+
+    <link rel="stylesheet" href="../Sources/CSS/main.css">
+</head>
+<body>
+    <h1>Listeler</h1>
+
+    <div style="height: 100px;"></div>
+    
+    <div id="mainDiv">
+        <h2>Listeler Nedir?</h2>
+        <pre id="preh2">Listeler, toplu bir şekilde depolanan değişkenlerin bulunabilmesini sağlayan yapılardır.</pre>
+    
+        <pre id="preh2">Örneğin; Alışverişe gitmeniz gerektiğinde alacağınız her şeyi aklınızda tutmanoz zor olabilir. Bunun için genellikle bir alışveriş listesi hazırlarız. İşte listeler bu işler için biçilmiş kaftandır.</pre>
+
+        <pre id="preh2">Listelerin avantajı ise ortak bir yönleri olan verileri toplu bir şekilde değerlendirmek için kullanılır.</pre>
+
+        <h2>Dizeler</h2>
+        <pre id="preh2">Dizeler, statik bir liste türüdür. Veriler önceden tanımlanır, sonradan veri eklenemez veya çıkartılamaz.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">DiziTürü[] X = {veriler...}</code></pre>
+
+        <pre id="preh2">Örneğin;</pre>
+
+        <pre id="codeh2"><code class="language-csharp">string[] Diller = { "C#", "Java", "Python", "JavaScript" };</code></pre>
+    
+        <h3>X[i]</h3>
+        <pre id="preh3">X'in i indisine denk gelen değeri getirir. Operatörler ile değiştirilebilir.</pre>
+
+        <h3>X.Count();</h3>
+        <pre id="preh3">X'in eleman sayısını verir.</pre>
+
+        <h2>Listeler</h2>
+        <pre id="preh2">Listeler, dinamik bir liste türüdür. Veriler önceden tanımlanabilir ve veriler silinebilir veya eklenebilir.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">List&lt;Türü> Isim = new List&lt;Türü> {veriler...};</code></pre>
+
+        <pre id="preh2">Örneğin;</pre>
+
+        <pre id="codeh2"><code class="language-csharp">List&ltint> numbers = new List&lt;int> { 1, 2, 3, 4, 5 };</code></pre>
+
+        <h3>X[i]</h3>
+        <pre id="preh3">X'in i indisine denk gelen değeri getirir. Operatörler ile değiştirilebilir.</pre>
+
+        <h3>X.Add(item);</h3>
+        <pre id="preh3">X'e item ekler.</pre>
+
+        <h3>X.Remove(i);</h3>
+        <pre id="preh3">X'in i indisindeki veriyi siler.</pre>
+
+        <h3>X.Clear();</h3>
+        <pre id="preh3">X'in içeriğini siler.</pre>
+
+        <h3>X.Count();</h3>
+        <pre id="preh3">X'in eleman sayısını verir.</pre>
+
+        <h3>X.Contains(item);</h3>
+        <pre id="preh3">İtem'in X'de var olup olmadığına kontrol eder.</pre>
+
+        <h3>X.Sort();</h3>
+        <pre id="preh3">X'in alfabetik olarak sıralar.</pre>
+
+        <h3>X.Reverse();</h3>
+        <pre id="preh3">X'i ters çevirir.</pre>
+        
+        <h2>Dictionary</h2>
+        <pre id="preh2">Dictionary yani sözlük, iki değer tutmamızı sağlar. Yani bir değerin başka bir değeri vermesi durumu vardır. Bu duruma Key-Value ilişkisi denir. Key girildiğinde Value değerini vermektedir.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">Dictionary&lt;KeyTürü,ValueTürü> numbers = new Dictionary&lt;KeyTürü,ValueTürü>()
+{
+    {key,value},
+    {key,value},
+    ...
+};</code></pre>
+
+        <pre id="preh2">Örneğin;</pre>
+
+        <pre id="codeh2"><code class="language-csharp">Dictionary&lt;string,int> numbers = new Dictionary&lt;string,int>()
+{
+    {"One",1},
+    {"Two",2},
+    {"Three",3},
+    {"Four",4},
+    {"Five",5}
+};</code></pre>
+
+        <h3>X[key]</h3>
+        <pre id="preh3">X'in key'ine denk gelen Value'i verir.</pre>
+
+        <h3>X.Add(KItem,VItem);</h3>
+        <pre id="preh3">X'e KItem ve VItem'i ekler.</pre>
+
+        <h3>X.Remove(key);</h3>
+        <pre id="preh3">X'in key'i ne denk gelen, Key'i ve Value'i siler.</pre>
+
+        <h3>X.Clear();</h3>
+        <pre id="preh3">X'in içeriğini siler.</pre>
+
+        <h3>X.Count();</h3>
+        <pre id="preh3">X'in eleman sayısını verir.</pre>
+
+        <h3>X.ContainsKey(item);</h3>
+        <pre id="preh3">İtem'in X'deki Key'lerde var olup olmadığına kontrol eder.</pre>
+
+        <h3>X.ContainsValue(item);</h3>
+        <pre id="preh3">İtem'in X'deki Value'lerde var olup olmadığına kontrol eder.</pre>
+
+        <pre id="preh2">List'lerdeki sıra mantığı fark edersiniz ki Dictionary'de yok. Bunun sebebi; Dictionary sırayla pek işi olmamasıdır. Bu yüzden Dictionary'de Sort ve Reverse gibi fonksiyonlar bulunmamaktadır.</pre>
+
+        <h2>Foreach</h2>
+        <pre id="preh2">Döngüler sayfamızda anlattığımız Foreach burada kullanılır. Görevi ise listelerdeki elemanları sırayla gezinmek ve onalara göre işlem yapılmasıdıır.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">foreach (var Isim in listeIsmi) 
+{
+    Console.WriteLine(Isim);
+}</code></pre>
+
+        <pre id="preh2">Örneğin;</pre>
+
+        <pre id="codeh2"><code class="language-csharp">string[] Meyveler = { "Elma", "Armut", "Muz", "Kivi" };
+
+foreach (var Meyve in Meyveler) 
+{
+    Console.WriteLine(Meyve);
+}</code>
+
+Meyvelerin sırayla yazıldığını görebilirsiniz.</pre>
+
+        <h2>String'in Yapısı</h2>
+        <pre id="preh2">String'in yapısı diğer değişken türlerine göre biraz daha farklıdır. Eski zamanlarda programlarda metinsel ifadeleri kullanmak için Char dizeleri kullanılırdı. Fakat hem o zamanlarda hem de günümüzde uğraştırıcı olduğundan, dil yapımcıları "String" adı altında aslında hala bir Char dizisi olan bir değişken türü yaptılar. Dizi olmasından mütebellit kendine özgü fonksiyonları vardır.</pre>
+
+        <h3>X[i]</h3>
+        <pre id="preh3">X'in i indisine denk gelen Char'ı getirir. Operatörler ile değiştirilebilir.</pre>
+
+        <h3>X.Remove(i);</h3>
+        <pre id="preh3">X'in i indisindeki Char'ı siler.</pre>
+
+        <h3>X.Split(char);</h3>
+        <pre id="preh3">X'i, her birinin sınırı char olcak şekilde böler ve bir String dizesi verir.</pre>
+
+        <h3>X.Trim();</h3>
+        <pre id="preh3">X'deki satırları siler.</pre>
+
+        <h3>X.Replace(Item1, Item2)</h3>
+        <pre id="preh3">X'deki Item1'leri, Item2'ye çevirir.</pre>
+
+        
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; background: transparent; text-align: center; padding: 10px 0; z-index: 100;">
+        <div>
+            <a href="./7 C%23 Döngüler.html" style="margin-right: 20px; cursor:pointer;">
+                &larr; Önceki
+            </a>
+            <a href="./9 C%23 Hata Yönetimi.html" style="cursor:pointer;">
+                Sonraki &rarr;
+            </a>
+        </div>
+        <div>
+            <p>&copy; 2026 Data's Book</p>
+        </div>
+
+        <div style="position: absolute; right: 20px; bottom: 20px;">
+            <a href="./1 C%23 İçindekiler.html" style="text-decoration: none;">
+                İçindekiler
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
+
+<!-- Muhammet Enes nam-ı diğer Data Delete tarafından sevgi ile yapıldı <3 -->

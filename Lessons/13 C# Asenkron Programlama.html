@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data's Book on C#</title>
+
+    <link rel="icon" type="image/x-icon" href="../Sources/favicon.png">
+
+    <script src="../Sources/JS/setBackgroundMedia.js"></script>
+
+    <link rel="stylesheet" href="../Sources/JS/hljs/vs2015.css">
+    <script src="../Sources/JS/hljs/highlight.min.js"></script>
+    <script>
+        window.onload = function() {
+            hljs.highlightAll();
+        };
+    </script>
+
+    <link rel="stylesheet" href="../Sources/CSS/main.css">
+</head>
+<body>
+    <h1>Asenkron Programlama</h1>
+        
+    <div style="height: 100px;"></div>
+    
+    <div id="mainDiv">
+        <h2>Asenkron Programalama</h2>
+        <pre id="preh2">Asenkron programalama, aynı anda iki veya ikiden fazla işi yapabilen ve yürütebilen programlamaya denir.</pre>
+
+        <pre id="preh2">Programlar genelde iki türle yazılır. Senkron ve asenkron. Senkron programlar, tek bir Thread çalışırlar; Asenkron ise birden fazla Thread ile aynı zamanda birden fazla işi yaparlar. Performans bakımından asenkron programlar, işlemcinin çekirdek sayısına bağlı olarak senkronlardan daha performanslıdırlar.</pre>
+
+        <pre id="preh2">Thread'leri aslında birer işçiye benzetebiliriz. Bu dijital işçi bizim verdiğimiz görevleri sırayla yapan bir yapıdadır. Senkron programlar tek bir işçisi vardır. Bu sebeble aynı anda iki işi yapamazlar. İşte bu durumda asenkron programlama devereye girerek, yeni dijital işçi alarak yani yeni Thread açarak, bazı işleri diğer işçilere vermemizi sağlar. Kullanıldığı durumlarda genelde Web teknolojileri, low-level programlama ve yeni yeni popüler olan AI programlamada kullanılır. Böylelikle aynı zamanda birden fazla iş yapılır.</pre>
+
+        <pre id="preh2">Başlangıç yani Main fonksiyonu olduğu gibi de Main Thread vardır. Bu Thread, programın başladığı Thread'dır. Aynı zamanda önceki sayfalarda bahsettiğim program akışı, Thread'lerden bahsediyordum ki Thread'lerde de aynı mantık vardır. Aynı anda iki işi yapabilmek için de ikiden fazla Thread yani program akışı gereklidir.</pre>
+
+        <h2>Task</h2>
+        <pre id="preh2">Task'ler, bizim için o dijital işçilermizdir. Basit bir şekilde birden fazla işi yapacaksak eğer Task kullanıyoruz. Yeni bir Task yani Thread veya bizim deyişimizle işçi açmak istersek; <code class="language-csharp">Task.Run(() => {Kodlar})</code> şeklinde açarız.</pre>
+
+        <pre id="preh2">Kullanabilmek için <code class="language-csharp">using System.Threading.Tasks;</code> ile projemize dahil etmeyi unutmuyoruz.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">Console.WriteLine("Ana program akışı başladı");
+
+Task.Run(() => 
+{
+    Console.WriteLine("Yeni bir program akışı açıldı");
+
+    Thread.Sleep(1000); // Hangi Task'daysak onu bekletir. Milisaniye cinsinden
+
+    Console.WriteLine("Yeni açılan program akışı bitti");
+});
+
+Thread.Sleep(2000); // Hangi Task'daysak onu bekletir. Milisaniye cinsinden
+
+Console.WriteLine("Ana program akışı bitti");</code>
+
+Kodu çalıştırırsanız eğer, konsolda ilk "Ana program akışı başladı" ve "Yeni bir program akışı açıldı" yazısını görüceksiniz. Bir saniye sonra "Yeni açılan program akışı bitti" yazısı ve bir saniye sonunda da "Ana program akışı bitti" yazısını görüceksiniz. Bunun sebebi, ana program akışı ile yeni program akışımız aynı anda başlıyor. Yeni açtığımız program akışı bir saniye ardından bitiyor. Ana program akışımız ise başladığı andan iki saniye sonra kapanıyor.</pre>
+
+        <h3>Task&lt;Tür> Kullanımı</h3>
+        <pre id="preh2">Bu yapı, <code>Task.Run();</code> komutunu birer Return'lü fonksiyon olarak kullanma imkanı sağlar.</pre>
+
+        <pre id="preh2">Öncekinde sadece <code>Task.Run();</code> yazardık ve içindekini yapar kapatırdı kendi. Şimdi ise onu bir değişkene atıyoruz. Değişkenimizin türü <code>Task&lt;Tür></code> olucak ve <code>TaskIsmi.Result</code> ile sonucu alabiliriz.</pre>
+        
+        <pre id="codeh2"><code> Console.WriteLine("Program başladı");
+
+ Task&lt;string> sonuc = Task.Run(() =>
+ {
+     Console.WriteLine("İşlemler yapılıyor...");
+
+     Thread.Sleep(2000);
+
+     Console.WriteLine("İşlemler tamalandı ana program akışında gösteriliyor...");
+
+     return "İşlem sorunsuz bir şekilde tamamlandı";
+ });
+
+ Console.WriteLine("İşlemlerin sonucu: " + sonuc.Result);
+
+ Console.WriteLine("Program bitti");</code>
+
+Program çalıştırılsa, yine aynı ana ile yeni program akışları aynı anda başlıyor. Yeni program akışı iki saniye bekliyor ve ardından "İşlem sorunsuz bir şekilde tamamlandı" sonucunu veriyor. Ana program akışınında sonuc.Result ile "İşlem sorunsuz bir şekilde tamamlandı" yazdırabiliyoruz. Fark ettiyseniz Main fonksiyonunda herhangi bir <code>Thread.Sleep()</code> komutu yok. Bunun sebebi; Yeni açılan Task'den gelecek olan bir sonucu beklemesidir. Buradan anlamamız gerek konu eğer bir Task, başka bir Task'den veri istiyor ise Task'lar birbirlerini beklerler.</pre>
+
+        <h2>Async/Await</h2>
+        <pre id="preh2">Asenkron programlama yapmamızı sağlayan araçlardır. Async ile Await kullanımını açarız., Await ile asenkron programı asenkron yaparız.</pre>
+
+        <pre id="preh2">Geldik asıl asenkron programalamya. Uygulaması için ilk örneğimizi biraz daha geliştirelim.</pre>
+
+        <pre id="preh2"><code class="language-csharp">static async Task YeniProgramAkisi()
+{
+    Console.WriteLine("Yeni bir program akışı açıldı");
+
+    Thread.Sleep(1000);
+
+    Console.WriteLine("Yeni açılan program akışı bitti");
+}
+
+public static async Task Main(string[] args)
+{
+    Console.WriteLine("Ana program akışı başladı");
+
+    await YeniProgramAkisi();
+
+    Console.WriteLine("Ana program akışı bitti");
+}</code>
+
+Yaptığmız işlem, ana ve yeni program akışları başlar. Yeni program akışında işlemler devam eder, o sırada ana program akışıda yeni açılan program akışını bekler o biter bitmez kendisini devam etirir.</pre>
+
+        <h2>Kaynakça</h2>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?v=Ew2SZyTpjuo">C# İyi Programcı Serisi : Asenkron Programlama Nedir? Mantığını Kavrayalım (Engin Demiroğ)</a></li>
+            <li><a href="https://www.youtube.com/watch?v=ce5JHZV9wRg">C# : Kafası Karışanlar için: Async/Await Keywords ve Task Parallel Library Nedir (Tarik Guney)</a></li>
+        </ul>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; background: transparent; text-align: center; padding: 10px 0; z-index: 100;">
+        <div>
+            <a href="./12 C%23 OOP.html" style="margin-right: 20px; cursor:pointer;">
+                &larr; Önceki
+            </a>
+            <a href="./14 C%23 Dosya İşlemleri.html" style="cursor:pointer;">
+                Sonraki &rarr;
+            </a>
+        </div>
+        <div>
+            <p>&copy; 2026 Data's Book</p>
+        </div>
+
+        <div style="position: absolute; right: 20px; bottom: 20px;">
+            <a href="./1 C%23 İçindekiler.html" style="text-decoration: none;">
+                İçindekiler
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
+
+<!-- Muhammet Enes nam-ı diğer Data Delete tarafından sevgi ile yapıldı <3 -->

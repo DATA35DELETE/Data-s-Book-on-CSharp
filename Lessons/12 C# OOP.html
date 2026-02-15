@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data's Book on C#</title>
+
+    <link rel="icon" type="image/x-icon" href="../Sources/favicon.png">
+
+    <script src="../Sources/JS/setBackgroundMedia.js"></script>
+
+    <link rel="stylesheet" href="../Sources/JS/hljs/vs2015.css">
+    <script src="../Sources/JS/hljs/highlight.min.js"></script>
+    <script>
+        window.onload = function() {
+            hljs.highlightAll();
+        };
+    </script>
+
+    <link rel="stylesheet" href="../Sources/CSS/main.css">
+</head>
+<body>
+    <h1>OOP</h1>
+
+    <div style="height: 100px;"></div>
+    
+    <div id="mainDiv">
+        <h2>Obje Yönelimli Programlama (Object Oriented Programming)</h2>
+        <pre id="preh2">Obje yönelimli programlama, sınıflar ve dört büyük ayağı olan kalıtım, kapsülleme, çok biçimlilik ve soyutlama gibi yeteneklere programlar veya programlama dillerine OOP yani obje yönelimli programlama denir.</pre>
+
+        <pre id="preh2">Çoğu durumda avantajlıdır. Çoğu durumda kod tekrarını önliyerek programcıya kolaylık sağlar. Örneğin kalıtım, kalıtılan sınıfın özelliklerini kalıtılanan sınıfa aktarırak kod tekrarlarını önler. Kapsülleme ile değişkenlerin korunasını ve ön koşullar eklenerek güvenliği sağlanır... </pre>
+
+        <h2>Kalıtım</h2>
+        <pre id="preh2">Kalıtım, bir sınıfın özelliklerini diğer bir sınıfa aktarmamızı sağlayan bir özelliktir. Bir nesneyi kalıtmak için "SinifIsmi : KalıtılanSinif" şeklinde yazılır. Bir sınıfın özellikleri ise; fonksiyonları ve değişkenleridir.</pre>
+
+        <pre id="preh2">Şimdi bir "Canli" sınıfımı oluşturalım. Ardından canlıların ortak özelliklerinden olan beslenme, büyüme ve kareket eylemlerini ekliyelim. Ardından "Kedi" ve "Kopek" isimli iki sınıf oluşturalım ve "Canli" sınıfından kalıtalım.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">class Canli // Canlı sınıfımız
+{
+    // Canlıların ortak özelliklerinden üç tane örnek
+    public void Beslenme()
+    {
+        Console.WriteLine("Canlı beslendi");
+    }
+
+    public void Hareket()
+    {
+        Console.WriteLine("Canlı hareket etti");
+    }
+
+    public void Buyume()
+    {
+        Console.WriteLine("Canlı büyüdü");
+    }
+}
+
+class Kedi : Canli
+{
+
+}
+
+class Kopek : Canli
+{
+
+}
+
+internal class Program
+{
+    static void Main(string[] args) // Ana fonksiyon
+    {
+        Kedi kedi = new Kedi(); // Kedi canlımzı
+
+        Console.WriteLine("Kedi:");
+        kedi.Beslenme(); // Canlı sınıfından gelen özellikler
+        kedi.Hareket();  // Canlı sınıfından gelen özellikler
+        kedi.Buyume();  // Canlı sınıfından gelen özellikler
+
+        Console.WriteLine("");
+
+        Kopek kopek = new Kopek(); // Köpek canlımız
+
+        Console.WriteLine("Köpek:");
+        kedi.Beslenme();  // Canlı sınıfından gelen özellikler
+        kedi.Hareket();  // Canlı sınıfından gelen özellikler
+        kedi.Buyume();  // Canlı sınıfından gelen özellikler
+    }
+}</code></pre>
+
+        <h2>Kapsülleme</h2>
+        <pre id="preh2">Kapsülleme, bir değişkene atama ve çekme işlemlerene ön koşul tanımlamaktır.</pre>
+
+        <pre id="preh2">Kapsülleme <code class="language-csharp">get</code> ve <code class="language-csharp">set</code> bloklarıyla gerçekleşir. <code class="language-csharp">Get</code>, değişkeni çekme işleminde çağrılan blok; <code>Set</code> ise değişkene atama işleminde cağrılan kod bloğudur. Böylelikle ön koşul elde ederibiliriz. Kapsülleme yaparken, kapsüllediğimiz değişkeni <code>Private</code> olarak ayarlarız. Yoksa kapsüllemenin bir espirisi kalmaz. Ardından <code>public DeğişkenTürü DeğişkenIsmi{...}</code> şeklinde kapsüllememizi yaparız.</pre>
+
+        <pre id="preh2">Şimdi biliyorsunuz ki yaş negatif sayılar olamazlar. İşte şimdi bu durumu kapsülleme ile uygulayalım. Kullanıcıdan yaşını istiyelim ve eğer yaşı sıfırdan küçük yani negatif girerse uyarı alsın.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">class Kullanici // Canlı sınıfımız
+{
+    private int yas;
+
+    public int Yas
+    {
+        get // Genelde get pek fazla kullanılmaz ve böyle bırakılır
+        {
+            return yas;
+        }
+
+        set
+        {
+            // Eşittir ile atanmak istenen değer, bu kısımda "value" isimli bir değişkene atanır
+
+            if (value < 0)
+            {
+                Console.WriteLine("Yaşınız negatif olamaz!");
+            }
+            else
+            {
+                yas = value;
+
+                Console.WriteLine($"Yaşınız: {yas}");
+            }
+        }
+    }
+}
+
+internal class Program
+{
+    static void Main(string[] args) // Ana fonksiyon
+    {
+        while (true) // Sonsuz döngü olsun ki program kapanmasın
+        {
+            Kullanici User = new Kullanici(); // Nesnemiz
+
+            Console.Write("Yaşınızı giriniz: ");
+            string YasString = Console.ReadLine();
+
+            User.Yas = Convert.ToInt32(YasString); // Kullanıcının girdiği yaşı gönder
+        }
+    }
+}</code></pre>
+
+        <div id="dibh2Img">
+            <img src="../Bibliography/12 C%23 OOP.html/1.png" alt="12.1" width="800px">
+        </div>
+
+        <h2>Çok Biçimlilik</h2>
+        <pre id="preh2">Çok biçimlilik, metodları veya değişkenleri ezmek veya gizlemek için kullanılan bir OOP prensibidir.</pre>
+
+        <pre id="preh2">Çok biçimlilik için <code>Vitrual</code> ve <code class="language-csharp">Override</code> anahtar kelimeleri kullanılır. <code>Vitrual</code>, çok biçimlilik ve <code>Override</code> ile üzerine yazmak yani metodu veya değişkeni ezmek için kullanılır. <code>New</code> ile metodu veya değişkeni gizliyerek, özünü kullanılır. Ayrıca çok biçimlilik için kalıtım gereklidir.</pre>
+
+        <pre id="preh2">Çok biçimliliği Kedi-Köpek-Canlı örneğimiz olan konusunda daha iyi anlatalım. Şimdi önceki örnekte ne oluyorudu?. Kedi de köpek de "Beslenme" metodunu çağırdığımızda "Canlı beslendi" yazısını alırız. Şimdi bunu değiştirelim ve canlıye özel metod oluşturalım.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">class Canli // Canlı sınıfımız
+{
+    // Canlıların ortak özelliklerinden üç tane örnek
+    public virtual void Beslenme()
+    {
+        Console.WriteLine("Canlı beslendi");
+    }
+
+    public virtual void Hareket()
+    {
+        Console.WriteLine("Canlı hareket etti");
+    }
+
+    public virtual void Buyume()
+    {
+        Console.WriteLine("Canlı büyüdü");
+    }
+}
+
+class Kedi : Canli
+{
+    public override void Beslenme()
+    {
+        Console.WriteLine("Kedi beslendi");
+    }
+    public new void Hareket()
+    {
+        Console.WriteLine("Kedi hareket etti");
+    }
+
+    public new void Buyume()
+    {
+        Console.WriteLine("Kedi büyüdü");
+    }
+}
+
+class Kopek : Canli
+{
+    public override void Beslenme()
+    {
+        Console.WriteLine("Köpek beslendi");
+    }
+    public new void Hareket()
+    {
+        Console.WriteLine("Köpek hareket etti");
+    }
+
+    public new void Buyume()
+    {
+        Console.WriteLine("Köpek büyüdü");
+    }
+}
+
+internal class Program
+{
+    static void Main(string[] args) // Ana fonksiyon
+    {
+        Kedi kedi1 = new Kedi(); // Klasik nesne oluşturma
+
+        kedi1.Beslenme();
+        kedi1.Hareket();
+        kedi1.Buyume();
+
+        Console.WriteLine("-----------------");
+
+        Kopek kopek1 = new Kopek(); // Klasik nesne oluşturma
+
+        kopek1.Beslenme();
+        kopek1.Hareket();
+        kopek1.Buyume();
+
+        Console.WriteLine("-----------------");
+
+        Canli kedi2 = new Kedi(); // Çok biçimlilik ile nesne oluşturma
+        // Bunu yapabiliyoruz çünkü "Kedi" sınıfımızın içinde "Canli" sınıfımızda yer almakta
+
+        kedi2.Beslenme(); // Metod ezildiği için konsolda "Köpek beslendi" yazılıcaktır
+        kedi2.Hareket(); // Metod gizlendiği için "Canlı hareket etti" yazılıcaktır
+        kedi2.Buyume();  // Metod gizlendiği için "Canlı hareket etti" yazılıcaktır
+
+        Console.WriteLine("-----------------");
+
+        Canli kopek2 = new Kopek(); // Çok biçimlilik ile nesne oluşturma
+
+        kopek2.Beslenme(); // Metod ezildiği için konsolda "Kedi beslendi" yazılıcaktır
+        kopek2.Hareket();  // Metod gizlendiği için "Canlı hareket etti" yazılıcaktır
+        kopek2.Buyume();  // Metod gizlendiği için "Canlı hareket etti" yazılıcaktır
+    }
+}</code></pre>
+
+        <div id="divh2Vid">
+            <img src="../Bibliography/12 C%23 OOP.html/2.png" alt="12.2" width="800px">
+        </div>
+
+        <h2>Soyutlama</h2>
+        <pre id="preh2">Soyutlama, türetilen sınıftaki özellikleri, türetiline zorunlu kıldıran sınıf türüdür.</pre>
+
+        <pre id="preh2">Normalde kalıtımda biz kalıtılan özellikler diğer kalıtılanlara aktarılırdı. Soyutlama ise yine kalıtım kullanılır ve soyut sınıftaki özellikleri, diğer kalıtılanlara zorunlu hale getirir ve özelliklerine <code class="language-csharp">Override</code> ile üzerine yazdırılır.</pre>
+
+        <pre id="preh2">Daha iyi anlamız için kalıtım örneğimiziyle aynı işlevi gören fakat soyutlama kullanan bir örnek yazalım.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">abstract class Canli // Canlı sınıfımız
+{
+    public abstract void Beslenme(); // Soyut özelliklerin gövdesi yani içeriği olmaz. Çünkü Override ile ezilcekleri için mantıksız olur
+    public abstract void Hareket(); // Soyut özelliklerin gövdesi yani içeriği olmaz. Çünkü Override ile ezilcekleri için mantıksız olur
+    public abstract void Buyume(); // Soyut özelliklerin gövdesi yani içeriği olmaz. Çünkü Override ile ezilcekleri için mantıksız olur
+
+}
+
+// Eğer soyut sınıftaki özellikler, sınıflarda Override edilmesse, hata alınıcaktır
+
+/*
+class Kedi : Canli
+{
+    public override void Beslenme()
+    {
+        Console.WriteLine("Kedi beslendi");
+    }
+    public override void Hareket()
+    {
+        Console.WriteLine("Kedi hareket etti");
+    }
+
+    Büyüme özellği Override edilmedi ve hata alınır
+}
+ */
+
+class Kedi : Canli
+{
+    public override void Beslenme()
+    {
+        Console.WriteLine("Kedi beslendi");
+    }
+    public override void Hareket()
+    {
+        Console.WriteLine("Kedi hareket etti");
+    }
+
+    public override void Buyume()
+    {
+        Console.WriteLine("Kedi büyüdü");
+    }
+}
+
+class Kopek : Canli
+{
+    public override void Beslenme()
+    {
+        Console.WriteLine("Köpek beslendi");
+    }
+    public override void Hareket()
+    {
+        Console.WriteLine("Köpek hareket etti");
+    }
+
+    public override void Buyume()
+    {
+        Console.WriteLine("Köpek büyüdü");
+    }
+}
+
+internal class Program
+{
+    static void Main(string[] args) // Ana fonksiyon
+    {
+        Kedi kedi1 = new Kedi();
+
+        kedi1.Beslenme();
+        kedi1.Hareket();
+        kedi1.Buyume();
+
+        Console.WriteLine("-----------------");
+
+        Kopek kopek1 = new Kopek();
+
+        kopek1.Beslenme();
+        kopek1.Hareket();
+        kopek1.Buyume();
+    }
+}</code></pre>
+
+        <div id="divh2Vid">
+            <img src="../Bibliography/12 C%23 OOP.html/3.png" alt="12.3" width="800px">
+        </div>
+
+        <h2>Kaynakça</h2>
+        <ul>
+            <li><a href="https://www.youtube.com/watch?v=1HB0vk0qhSI">Çok Biçimilik ile ilgili bir anlatım videosu (Gurkan Karaman adlı kanal)</a></li>
+            <li><a href="https://www.youtube.com/watch?v=OoEFYMUPAV0">Soyutlama ile ilgili bir anlatım videosu (Gurkan Karaman adlı kanal)</a></li>
+        </ul>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; background: transparent; text-align: center; padding: 10px 0; z-index: 100;">
+        <div>
+            <a href="./11 C%23 Sınıflar.html" style="margin-right: 20px; cursor:pointer;">
+                &larr; Önceki
+            </a>
+            <a href="./13 C%23 Asenkron Programlama.html" style="cursor:pointer;">
+                Sonraki &rarr;
+            </a>
+        </div>
+        <div>
+            <p>&copy; 2026 Data's Book</p>
+        </div>
+
+        <div style="position: absolute; right: 20px; bottom: 20px;">
+            <a href="./1 C%23 İçindekiler.html" style="text-decoration: none;">
+                İçindekiler
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
+
+<!-- Muhammet Enes nam-ı diğer Data Delete tarafından sevgi ile yapıldı <3 -->

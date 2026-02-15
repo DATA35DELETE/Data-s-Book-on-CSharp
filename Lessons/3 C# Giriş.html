@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data's Book on C#</title>
+
+    <link rel="icon" type="image/x-icon" href="../Sources/favicon.png">
+
+    <script src="../Sources/JS/setBackgroundMedia.js"></script>
+
+    <link rel="stylesheet" href="../Sources/JS/hljs/vs2015.css">
+    <script src="../Sources/JS/hljs/highlight.min.js"></script>
+    <script>
+        window.onload = function() {
+            hljs.highlightAll();
+        };
+    </script>
+
+    <link rel="stylesheet" href="../Sources/CSS/main.css">
+</head>
+<body>
+    <h1>Giriş</h1>
+
+    <div style="height: 100px;"></div>
+    
+    <div id="mainDiv">
+        <h2>Yazılım Nedir?</h2>
+        <pre id="preh2">Yazılım, donanıma elektriksel olarak hangi eylemi yapmasını gerektiği söyleyen bir dildir. Yani yazılım olmasaydı donanımlar pek işimize yaramazdı. Aynı şekilde donanım olmasaydıda yazılım var olamazdı.</pre>
+
+        <h3>Donanım Nedir?</h3>
+        <pre id="preh3">Donanımda gözle görebildiğimiz dokunabildiğimiz, bilgisayarın içersinde bulununan nesnelerdir. Yazılım ise gözle görülemez veya dokunulamaz.</pre>
+        
+        <pre id="preh2">Yazılım dillerinin iki türü vardır.</pre>
+
+        <h3>Low-Level ve High-Level</h3>
+        <pre id="preh3">Yazılım dilleri, derinliklerine bu iki kategoriye girerler. Low-Level yazılım dilleri, makine dili olan, meşur birler ve sıfırler, Binary'ye yakın olanlardır. Bu diller insanlar tarafından zor okunur. High-Level dilleri ise insanlar tarafından kolaylıkla okunabilir fakat makineler tarafından zor okunur. Bu High ve Low mesela sanılanın aksine dillerin güçlerinin değil, insan diline ne kadar yakın olduğunu belirtir.</pre>
+
+        <h3>Yazılım Dilleri</h3>
+        <pre id="preh3">Rust, C/C++, Java, Kotlin, Python. Bunlar duyabilmiş olcağınız yazılım dilleridir.</pre>
+
+        <h2>C# Nedir?</h2>
+        <pre id="preh2">Microsoft tarafından geliştirilen, .NET projesi için yapılan bir programlama dilidir.</pre>
+
+        <h3>Tarihçesi</h3>
+        <pre id="preh3">C#, 2000 yalında Anders Hejlsberg'ın liderliğiyle beraber Microsoft tarafından geliştirilmiştir. Dil yapılırken Java'nın söz dizimini ve C ve C++'ın gücünü birleştirilmeye çalışılmıştır. Söz dizimi ise yazılımın birnevi yazılma kuralı. Dil, nesne yönelimli programlamayı merkeze alır. İlk sürümü 2002 de çıkmış olup, 2025 tarihinde son kararlı sürümünü yayımlamıştır. Ayrıa son sürümlerde, Python söz dizimine benziyecek şekilde Class'sız programlama yapabilceğiniz bir hale gelmiştir. Fakat biz Class'lı halini işliyeceğiz.</pre>
+
+        <h3>C# Nasıl Kullanılır?</h3>
+        <pre id="preh3">C# kullanabilmek için yani yazabilmek için ilk önce onu yazabilciğimiz bir ortama ihtiyacımız var. İşte onuda Visaul Studio ile sağlayacağız. Tabi Visaul Studio biraz karmaşık ve ağır. O yüzden hem Visual Studio kurulumunu hem de konsol üzerinden Visual Studio Code ile nasıl kullanabilceğinizi göstereceğim. Kodlarda herhangi bir değişiklik olmucaktır, her iki ortamda da çalışıcaktır.</pre>
+
+        <h3>C# Kullanım Alanları</h3>
+        <ul>
+            <li>Unity</li>
+            <li>Konsol uygulamaları</li>
+            <li>Avalonia ile gelişmiş uygulamalar</li>
+        </ul>
+
+        <h3>OOP</h3>
+        <pre id="preh3">Geldik C#'ın olmassa olmazı OOP yani Nesne Yönelimli Programlama, OOP aslında bizlere; Kalıtım, çok biçimlilik, soyutlama ve kapsülleme gibi özellikler sunar. Bunlar kod tekrarlarını önleyerek daha iyi ve performanslı uygulamalar geliştirmemizi sağlar. İlerleyen sayfalar uygulamalı şekilde OOP daha derin işliyeceğiz</pre>
+
+        <h2>C#'ı Kurma</h2>
+        <pre id="preh2">C# programlama dilini kurmak için Visual Studio'yu kullanıcağız.</pre>
+
+        <h3>Visual Studio Kurulumu</h3>
+        <pre id="preh3">İlk olarak Visual Studio'nun <a href="https://visualstudio.microsoft.com/tr/thank-you-downloading-visual-studio/?sku=Community&channel=Stable&version=VS18&source=VSLandingPage&cid=2500&passive=false">sitesinden</a> indirelim. İndirilen .exe dosyasını çalıştıralım ve kurulumu başlatalım. Ardından gelen ekranda kullanıcağımız SDK'leri indirelim.</pre>
+
+        <div id="divh3Img">
+            <img src="../Bibliography/4 C%23 Değişkenler.html/1.png" alt="4.1" width="800px">
+        </div>
+
+        <pre id="preh3">Ekran görüntüsünde de gözüktüğü üzere C++, Python ve NodeJS gibi araçlarıda bu IDE'den kullanabiliriz.</pre>
+
+        <h3>Proje Oluşturma</h3>
+        <pre id="preh3">Kurulum tamamlandıktan sonra Visual Studio'muzu açalım. Açılan pencerede "Yeni bir proje oluştur" butonuna basalım.</pre>
+
+        <div id="divh3Img"> 
+            <img src="../Bibliography/4 C%23 Değişkenler.html/2.png" alt="4.2" width="800px">
+        </div>
+
+        <pre id="preh3">Ardından "Sonraki" butona basalım. Ardından gelen pencerede "Üst düzey deyimler kullanmayın" kutusunu işaretledikten sonra "Oluştur" diyerek projemizi oluşturalım.</pre>
+
+        <pre id="preh3">Tebrikler! Artık C# uygulamaları yazabiliriz.</pre>
+
+        <h2>İLk Kod</h2>
+        <pre id="preh2">Kodlarımızı yazmadan önce şu komutu göstermek isterim.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">class Program // Ana Class
+{
+    static void Main() // İlk çağrılan fonksiyon
+    {
+        Console.WriteLine("Merhaba Dünya!"); // Konsola yazı yazdırma
+    }
+}</code>
+
+Bu programı çalıştırcak olursak, ekranda "Merhaba Dünya!" yazısını görürüz. Bundan şunu anlıyoruz ki <code class="language-csharp">Console.WriteLine()</code>, ekrana bişiler yazdırmamızı sağlıyor.</pre>
+    
+    <h2>Kaynakça</h2>
+    <ul>
+        <li><a href="https://visualstudio.microsoft.com/tr/thank-you-downloading-visual-studio/?sku=Community&channel=Stable&version=VS18&source=VSLandingPage&cid=2500&passive=false">Visual Studio İndirme</a></li>
+        <li><a href="../Bibliography/4 C%23 Değişkenler.html/1.png">4.1</a></li>
+        <li><a href="../Bibliography/4 C%23 Değişkenler.html/2.png">4.2</a></li>
+    </ul>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; background: transparent; text-align: center; padding: 10px 0; z-index: 100;">
+        <div>
+            <a href="./2 Ön Söz.html" style="margin-right: 20px; cursor:pointer;">
+                &larr; Önceki
+            </a>
+            <a href="./4 C%23 Değişkenler.html" style="cursor:pointer;">
+                Sonraki &rarr;
+            </a>
+        </div>
+        <div>
+            <p>&copy; 2026 Data's Book</p>
+        </div>
+
+        <div style="position: absolute; right: 20px; bottom: 20px;">
+            <a href="./1 C%23 İçindekiler.html" style="text-decoration: none;">
+                İçindekiler
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
+
+<!-- Muhammet Enes nam-ı diğer Data Delete tarafından sevgi ile yapıldı <3 -->

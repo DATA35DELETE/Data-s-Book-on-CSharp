@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data's Book on C#</title>
+
+    <link rel="icon" type="image/x-icon" href="../Sources/favicon.png">
+
+    <script src="../Sources/JS/setBackgroundMedia.js"></script>
+
+    <link rel="stylesheet" href="../Sources/JS/hljs/vs2015.css">
+    <script src="../Sources/JS/hljs/highlight.min.js"></script>
+    <script>
+        window.onload = function() {
+            hljs.highlightAll();
+        };
+    </script>
+
+    <link rel="stylesheet" href="../Sources/CSS/main.css">
+</head>
+<body>
+    <h1>Karar Yapıları</h1>
+
+    <div style="height: 100px;"></div>
+    
+    <div id="mainDiv">
+        <h2>Karar Yapıları Nedir?</h2>
+        <pre id="preh2">Karar Yapıları, programın akışını yönlendirebilceğimiz yapılardır. Boolean değerlerine göre işlemlem yapmamızı sağlar.</pre>
+
+        <pre id="preh2">Program akşını, C# programlama dili ve diğer benzeri dillerde kodlar yukarıdan aşağı doğru işlenir ve çalıştırıl. İşte bu sürece program akışı denir.</pre>
+
+        <pre id="preh2">Örneğin; Bir banka uygulamsında kullanda, kullanıcının girdiği şifrenin gerçekten doğru olup olmadığını kontrol etmek için kullanırız. Eğer karar yapıları olmasaydı bütün programlar kullanılamaz hale gelir, hatta yapay zeka yapmak imkansız hale gelirdi.</pre>
+
+        <h2>If-Else If-Else</h2>
+        <pre id="preh2">If, parantezlerindeki değer <code class="language-python">True</code> ise kendi kod bloklarını çalıştırır. Else If, parantezlerindeki değer <code class="language-python">True</code> ve If çalışmaz ise kendi kod bloklarını çalıştırır. Else ise hiçbir karar yapısı çalışmaz ise kendisi çalışır.</pre>
+
+        <pre id="preh2">Bir programda sınırsız If, eğer üstünde If var ise sınırsız Else If konulabilir. Else ise üstünde If var ise sadece o If'e ait ve bir tane konulabilir.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">int a = 1;
+
+if (a == 1) // A bir ise
+{
+    Console.WriteLine("a = 1");
+}
+else if (a == 2) // A iki ise
+{
+    Console.WriteLine("a = 2");
+}
+else // A bir veya iki değilse
+{
+    Console.WriteLine("a != 1 ve a != 2");
+}</code></pre>
+
+        <h2>Switch-Case-Default</h2>
+        <pre id="preh2">Yapısı If-Else If-Else'e benzerdir. Switch'in parantezlerine sorgulanacak değişken tanımlanır. Case'lerde değişkenin değerime göre çalıştırıl. Default ise hiç bir Case çalışmaz ise kendisi çalışır.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">int a = 2;
+
+switch (a) // Sorgulanacak değişken
+{
+    case 1: // A bir ise
+        Console.WriteLine("a = 1");
+        break; // Case1'in bitiş kısmı. Konulmaz ise diğer Case'leri çalıştırır
+
+    case 2:// A iki ise
+        Console.WriteLine("a = 2");
+        break;
+
+    default: // A bir veya iki değilse
+        Console.WriteLine("a != 1 ve a != 2");
+        break;
+}</code></pre>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; background: transparent; text-align: center; padding: 10px 0; z-index: 100;">
+        <div>
+            <a href="./5 C%23 Operatörler.html" style="margin-right: 20px; cursor:pointer;">
+                &larr; Önceki
+            </a>
+            <a href="./7 C%23 Döngüler.html" style="cursor:pointer;">
+                Sonraki &rarr;
+            </a>
+        </div>
+        <div>
+            <p>&copy; 2026 Data's Book</p>
+        </div>
+
+        <div style="position: absolute; right: 20px; bottom: 20px;">
+            <a href="./1 C%23 İçindekiler.html" style="text-decoration: none;">
+                İçindekiler
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
+
+<!-- Muhammet Enes nam-ı diğer Data Delete tarafından sevgi ile yapıldı <3 -->

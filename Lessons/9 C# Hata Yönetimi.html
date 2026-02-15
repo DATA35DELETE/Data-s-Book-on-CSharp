@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data's Book on C#</title>
+
+    <link rel="icon" type="image/x-icon" href="../Sources/favicon.png">
+
+    <script src="../Sources/JS/setBackgroundMedia.js"></script>
+
+    <link rel="stylesheet" href="../Sources/JS/hljs/vs2015.css">
+    <script src="../Sources/JS/hljs/highlight.min.js"></script>
+    <script>
+        window.onload = function() {
+            hljs.highlightAll();
+        };
+    </script>
+
+    <link rel="stylesheet" href="../Sources/CSS/main.css">
+</head>
+<body>
+    <h1>Hata Yönetimi</h1>
+
+    <div style="height: 100px;"></div>
+    
+    <div id="mainDiv">
+        <h2>Hata Yönetimi</h2>
+        <pre id="preh2">Hata yönetimi, olması muhtemel olan hataları yönetmek ve program akışını değiştirmek için kullanılan yapılardır.</pre>
+
+        <pre id="preh2">C# programlama dilinde eğer bir hata çıkar ise, bütün program çökebilir. Üstelik bu durum sadece işte WriteLine yerine WritLine gibi yanlış yazım yanı Sytax hataları olmayan hatalar. Genellikle kulanıcı kaynaklı olan hataları yönetmemiz gereklidir. Mesela biz kullanıcıdan Integer isteriz, o bize String verir. Haliyle program hata verek kapanır. İşte bu gibi durumlarda hata yönetimi kullanılır.</pre>
+
+        <h2>Try-Catch</h2>
+        <pre id="">C# programlama dilinde hata yönetimi için kullanılır.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">while (true)
+{
+    try // Muhtemel hatanın çıkacağı kısım
+    {
+        Console.Write("Bir sayı giriniz: ");
+        int sayi1 = Convert.ToInt32(Console.ReadLine()); // Çıkarması muhtemel hatalı kod
+    }
+    catch (Exception ex) // Hatanın türü
+    {
+        Console.WriteLine(ex.Message);
+    }
+}</code>
+
+Böylelike hata bile alınsa program çökmeyecektir.</pre>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/9 C%23 Hata Yönetini.html/1.png" alt="9.1" width="800px">
+        </div>
+
+        <h2>Hata Fırlatma</h2>
+        <pre id="preh2">Her bir hatanın kendine has bir mesajı vardır. Eğer istersek kendi hata mesajımızla bir hata fırlatabiliriz.</pre>
+
+        <pre id="codeh2"><code class="language-csharp">while (true)
+{
+    try
+    {
+        Console.Write("1 veya 2 tuşlayınız: ");
+
+        string input1 = Console.ReadLine();
+
+        if (input1 == "1")
+        {
+            Console.WriteLine("1'i seçtiniz.");
+        }
+        else if (input1 == "2")
+        {
+            Console.WriteLine("2'yi seçtiniz.");
+        }
+        else
+        {
+            throw new Exception("Geçersiz giriş yaptınız."); // Eğer kullanıcı 1 veya 2'yi seçmezse, özel bir hata oluşturduk ve fırlattık
+        }
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}</code></pre>
+
+        <div id="divh2Img">
+            <img src="../Bibliography/9 C%23 Hata Yönetini.html/2.png" alt="9.2" width="800px">
+        </div>
+
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; background: transparent; text-align: center; padding: 10px 0; z-index: 100;">
+        <div>
+            <a href="./8 C%23 Listeler.html" style="margin-right: 20px; cursor:pointer;">
+                &larr; Önceki
+            </a>
+            <a href="./10 C%23 Fonksiyonlar.html" style="cursor:pointer;">
+                Sonraki &rarr;
+            </a>
+        </div>
+        <div>
+            <p>&copy; 2026 Data's Book</p>
+        </div>
+
+        <div style="position: absolute; right: 20px; bottom: 20px;">
+            <a href="./1 C%23 İçindekiler.html" style="text-decoration: none;">
+                İçindekiler
+            </a>
+        </div>
+    </footer>
+</body>
+</html>
+
+<!-- Muhammet Enes nam-ı diğer Data Delete tarafından sevgi ile yapıldı <3 -->
