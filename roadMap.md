@@ -2,9 +2,7 @@
 
 ## C# ☑️
 
-### C# : İçindekinler
-
-- [İçindekinler](#c--i̇çindekinler)
+### İçindekiler 
 
 ### Ön Söz ☑️
 - Ben kimim?
